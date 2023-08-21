@@ -1,5 +1,5 @@
 // ------------  Paquete e importaciones ------------
-package StatpyAnalizadores;
+package JsonAnalizadores;
 
 import java_cup.runtime.*;
 
@@ -30,14 +30,11 @@ action code
 
 
 //------> Declaración de terminales
-terminal String ENTERO,PARENTESIS_A,PARENTESIS_C,LLAVE_A,LLAVE_C,PUNTO_COMA,DOSP,COMA,CORCHETE_A,
-CORCHETE_C,DOLAR,IGUAL,MAS,MENOS,POR,DIV,MAYOR,MENOR,M_IGUAL,ENOR_IGUAL,
-IGUALIGUAL,DIFERENTE,AND,OR,NOT,VOID,INT,DOUBLE,CHAR,BOOL,STRING,MAIN,IF,
-ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO;
+terminal String DOUBLE,STRING,LLAVE_AA,LLAVE_CC,DOSP,COMA;
 
 
 //------> Declaración de no terminales
-non terminal inicio;
+non terminal inicio,CUERPO,VALORES ;
 
 
 //------> Definir Simbolo Inicial
@@ -46,6 +43,15 @@ start with inicio;
 
 // ------------>  Producciones  <------------
 
-inicio ::= ENTERO PARENTESIS_A IGUALIGUAL IGUAL  
-|DO CONSOL FOR
-;
+inicio ::= LLAVE_AA CUERPO LLAVE_CC ;
+
+CUERPO::= STRING DOSP VALORES
+       |STRING DOSP VALORES COMA CUERPO;
+
+VALORES ::= STRING
+        |DOUBLE;
+
+
+
+
+

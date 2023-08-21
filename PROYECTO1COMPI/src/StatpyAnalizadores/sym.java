@@ -8,32 +8,49 @@ package StatpyAnalizadores;
 /** CUP generated class containing symbol constants. */
 public class sym {
   /* terminals */
-  public static final int AND = 24;
-  public static final int MENOS = 15;
-  public static final int IGUALIGUAL = 22;
-  public static final int MENOR = 19;
-  public static final int ENOR_IGUAL = 21;
-  public static final int OR = 25;
-  public static final int DOLAR = 12;
-  public static final int IGUAL = 13;
-  public static final int NOT = 26;
-  public static final int DOSP = 8;
   public static final int POR = 16;
-  public static final int COMA = 9;
-  public static final int MAYOR = 18;
-  public static final int EOF = 0;
+  public static final int CHAR = 30;
+  public static final int ENTERO = 2;
+  public static final int CASE = 42;
   public static final int DIFERENTE = 23;
+  public static final int DOUBLE = 29;
+  public static final int CORCHETE_C = 11;
+  public static final int INT = 28;
+  public static final int CORCHETE_A = 10;
+  public static final int LLAVE_C = 6;
+  public static final int FOR = 38;
+  public static final int LLAVE_A = 5;
+  public static final int ENOR_IGUAL = 21;
+  public static final int NOT = 26;
+  public static final int AND = 24;
+  public static final int IGUAL = 13;
+  public static final int OR = 25;
+  public static final int BOOL = 31;
   public static final int DIV = 17;
-  public static final int PARENTESIS_C = 4;
+  public static final int MAIN = 33;
+  public static final int IF = 34;
+  public static final int PUNTO_COMA = 7;
+  public static final int EOF = 0;
   public static final int error = 1;
   public static final int M_IGUAL = 20;
+  public static final int COMA = 9;
+  public static final int MENOS = 15;
+  public static final int MENOR = 19;
+  public static final int BREAK = 37;
+  public static final int VOID = 27;
+  public static final int SWITCH = 36;
+  public static final int MAYOR = 18;
+  public static final int ELSE = 35;
+  public static final int PARENTESIS_C = 4;
+  public static final int IGUALIGUAL = 22;
+  public static final int CONSOL = 40;
+  public static final int WHILE = 39;
   public static final int PARENTESIS_A = 3;
-  public static final int LLAVE_C = 6;
-  public static final int LLAVE_A = 5;
-  public static final int PUNTO_COMA = 7;
-  public static final int ENTERO = 2;
-  public static final int CORCHETE_C = 11;
-  public static final int CORCHETE_A = 10;
+  public static final int DEFAULT = 41;
+  public static final int DOSP = 8;
+  public static final int STRING = 32;
+  public static final int DOLAR = 12;
+  public static final int DO = 43;
   public static final int MAS = 14;
   public static final String[] terminalNames = new String[] {
   "EOF",
@@ -62,7 +79,24 @@ public class sym {
   "DIFERENTE",
   "AND",
   "OR",
-  "NOT"
+  "NOT",
+  "VOID",
+  "INT",
+  "DOUBLE",
+  "CHAR",
+  "BOOL",
+  "STRING",
+  "MAIN",
+  "IF",
+  "ELSE",
+  "SWITCH",
+  "BREAK",
+  "FOR",
+  "WHILE",
+  "CONSOL",
+  "DEFAULT",
+  "CASE",
+  "DO"
   };
 }
 

@@ -21,6 +21,9 @@ import java_cup.runtime.*;
 // ------> Expresiones Regulares 
 
 entero = [0-9]+
+//----> COMENTARIOS
+
+COMENT_S = "//" .*
 
 
 %%
@@ -61,6 +64,33 @@ entero = [0-9]+
 "||"      {return new Symbol(sym.OR, yycolumn, yyline, yytext());}
 "!"       {return new Symbol(sym.NOT, yycolumn, yyline, yytext());}
 
+//--> funciones.funcion.ListaT.add(new Tokens(yytext() ,"punto_coma" ,yyline ,yycolumn)); PARA LA TABLA DE TOKENS 
+//----> PALABRAS RESERVADAS 
+"void"      {return new Symbol(sym.VOID, yycolumn, yyline, yytext());}
+"int"       {return new Symbol(sym.INT, yycolumn, yyline, yytext());}
+"double"    {return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext());}
+"char"      {return new Symbol(sym.CHAR, yycolumn, yyline, yytext());}
+"bool"      {return new Symbol(sym.BOOL, yycolumn, yyline, yytext());}
+"string"    {return new Symbol(sym.STRING, yycolumn, yyline, yytext());}
+"main"      {return new Symbol(sym.MAIN, yycolumn, yyline, yytext());}
+"if"        {return new Symbol(sym.IF, yycolumn, yyline, yytext());}
+"else"      {return new Symbol(sym.ELSE, yycolumn, yyline, yytext());}
+"switch"    {return new Symbol(sym.SWITCH, yycolumn, yyline, yytext());}
+"break"     {return new Symbol(sym.BREAK, yycolumn, yyline, yytext());}
+"for"       {return new Symbol(sym.FOR, yycolumn, yyline, yytext());}
+"while"     {return new Symbol(sym.WHILE, yycolumn, yyline, yytext());}
+"Console.Write"     {return new Symbol(sym.CONSOL, yycolumn, yyline, yytext());}
+"default"   {return new Symbol(sym.DEFAULT, yycolumn, yyline, yytext());}    
+"case"      {return new Symbol(sym.CASE, yycolumn, yyline, yytext());}
+"do"        {return new Symbol(sym.DO, yycolumn, yyline, yytext());}
+
+//----> palabras reservadas para graficas falta preguntarle al aux
+
+
+
+
+
+
 
 // --  LEXICOS
 {entero}  { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }
@@ -70,6 +100,9 @@ entero = [0-9]+
 
 //------> Ingorados 
 [ \t\r\n\f]     {/* Espacios en blanco se ignoran */}
+
+
+{COMENT_S}      {}
 
 //------> Errores Léxicos 
 .           	{ System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn); }

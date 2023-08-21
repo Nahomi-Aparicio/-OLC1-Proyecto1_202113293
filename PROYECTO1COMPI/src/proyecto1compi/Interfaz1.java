@@ -353,22 +353,24 @@ public static boolean EsStay =false;
     }//GEN-LAST:event_guardarActionPerformed
 
     private void EjecutarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EjecutarActionPerformed
-    /*String seleccionAnalisis =   Analizadoresbotn.getSelectedItem()  .toString();
+    String seleccionAnalisis =   Analizadoresbotn.getSelectedItem()  .toString();
     
     if (seleccionAnalisis=="Analizador JSON"){
-   
-    System.out.println("Aqui va lo de el analizador JSon");
+        System.out.println("Aqui va lo de el analizador JSon");
+        //analizadoresJson("src/JsonAnalizadores/", "Jlexico.jflex", "Jsintactico.cup");
+          String Texto_enlaentrada = Entrada.getText();
+          analizarJson(Texto_enlaentrada);
+          
     }else if (seleccionAnalisis=="Analizador StatPy"){
-        System.out.println("Aqui va lo statpy");/
+        System.out.println("Aqui va lo statpy");
+          //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
+          String Texto_enlaentrada = Entrada.getText();
+          analizarStay(Texto_enlaentrada);
+                
         
     }
-    */    
-    //funciones.funcion.mostrar("holi");
-      //analizadores("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
-      String Texto_enlaentrada = Entrada.getText();
-      analizar(Texto_enlaentrada);
-      
-      
+        
+    //funciones.funcion.mostrar("holi");      
       //ESTO ES PARA LA TABLA DE TOKENS AUN FALTA PERO ESTA CASI EL COMO HACERLO 
      /* funciones.funcion.ListaT.forEach((elemento)->{      
         System.out.println(elemento);
@@ -377,7 +379,7 @@ public static boolean EsStay =false;
       
     }//GEN-LAST:event_EjecutarActionPerformed
 
-    public static void analizar (String entrada){
+    public static void analizarStay (String entrada){
         try {
             StatpyAnalizadores.Lexer lexer = new StatpyAnalizadores.Lexer(new StringReader(entrada)); 
             StatpyAnalizadores.Parser parser = new StatpyAnalizadores.Parser(lexer);
@@ -389,7 +391,32 @@ public static boolean EsStay =false;
     } 
     
     
-    public static void analizadores(String ruta, String jflexFile, String cupFile){
+    public static void analizadoresStay(String ruta, String jflexFile, String cupFile){
+        try {
+            String opcionesJflex[] =  {ruta+jflexFile,"-d",ruta};
+            jflex.Main.generate(opcionesJflex);
+
+            String opcionesCup[] =  {"-destdir", ruta,"-parser","Parser",ruta+cupFile};
+            java_cup.Main.main(opcionesCup);
+            
+        } catch (Exception e) {
+            System.out.println("No se ha podido generar los analizadores");
+            System.out.println(e);
+        }
+    } 
+    
+     public static void analizarJson (String entrada){
+        try {
+            JsonAnalizadores.Lexer lexer = new JsonAnalizadores.Lexer(new StringReader(entrada)); 
+            JsonAnalizadores.Parser parser = new JsonAnalizadores.Parser(lexer);
+            parser.parse();
+        } catch (Exception e) {
+            System.out.println("Error fatal en compilación de entrada.");
+            System.out.println(e);
+        } 
+    } 
+    
+     public static void analizadoresJson(String ruta, String jflexFile, String cupFile){
         try {
             String opcionesJflex[] =  {ruta+jflexFile,"-d",ruta};
             jflex.Main.generate(opcionesJflex);
@@ -402,11 +429,6 @@ public static boolean EsStay =false;
             System.out.println(e);
         }
     }
-    
-    
-    
-    
-    
     
     /**
      * 
