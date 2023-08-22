@@ -25,9 +25,8 @@ CADENA = \" ([^\"] | "\\\"")+ \"
 entero = [0-9]+
 ID = [a-zA-Z_][a-zA-Z0-9_]*
 //----> COMENTARIOS
-
 COMENT_S = "//" .*
-
+COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 
 %%
 // ------------  Reglas Lexicas -------------------
@@ -102,7 +101,8 @@ COMENT_S = "//" .*
 [ \t\r\n\f]     {/* Espacios en blanco se ignoran */}
 
 
-{COMENT_S}      {}
+{COMENT_S}    {}
+{COMENT_M}    {}
 
 //------> Errores Léxicos 
 .           	{ System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn); }

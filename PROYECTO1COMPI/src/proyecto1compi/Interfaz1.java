@@ -363,7 +363,7 @@ public static boolean EsStay =false;
           
     }else if (seleccionAnalisis=="Analizador StatPy"){
         System.out.println("Aqui va lo statpy");
-         analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
+         //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
           String Texto_enlaentrada = Entrada.getText();
           analizarStay(Texto_enlaentrada);
                 

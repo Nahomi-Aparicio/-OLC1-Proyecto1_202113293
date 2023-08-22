@@ -48,8 +48,10 @@ inicio ::= LLAVE_AA CUERPO LLAVE_CC ;
 CUERPO::= STRING DOSP VALORES
        |STRING DOSP VALORES COMA CUERPO;
 
-VALORES ::= STRING
-        |DOUBLE;
+VALORES ::= STRING:val    {:  System.out.println(val);:}
+        |DOUBLE:val         {:  System.out.println(val);:}
+
+;
 
 
 

@@ -22,8 +22,9 @@ import java_cup.runtime.*;
 
 doubles = [0-9]+"."[0-9]+
 string = \" ([^\"] | "\\\"")+ \"
-
-
+//----> COMENTARIOS
+COMENT_S = "//" .*
+COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 
 
 // ------------  Código Java -------------------
@@ -40,12 +41,15 @@ string = \" ([^\"] | "\\\"")+ \"
 
 // ------> Expresiones Regulares 
 {doubles}  { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }
-{string}  {System.out.println(yytext()); return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }
+{string}  { return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }
 
 
 
 //------> Ingorados 
 [ \t\r\n\f]     {/* Espacios en blanco se ignoran */}
+{COMENT_S}    {}
+{COMENT_M}    {}
+
 
 //------> Errores Léxicos 
 .           	{ System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn); }
