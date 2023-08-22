@@ -20,7 +20,10 @@ import java_cup.runtime.*;
 
 // ------> Expresiones Regulares 
 
+
+CADENA = \" ([^\"] | "\\\"")+ \"
 entero = [0-9]+
+ID = [a-zA-Z_][a-zA-Z0-9_]*
 //----> COMENTARIOS
 
 COMENT_S = "//" .*
@@ -87,14 +90,11 @@ COMENT_S = "//" .*
 //----> palabras reservadas para graficas falta preguntarle al aux
 
 
+// ------>   LEXICOS
+{entero}     { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }
 
-
-
-
-
-// --  LEXICOS
-{entero}  { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }
-
+{ID}         { return new Symbol(sym.ID, yycolumn, yyline, yytext()); }
+{CADENA}   { return new Symbol(sym.CADENA, yycolumn, yyline, yytext()); }
 
 
 

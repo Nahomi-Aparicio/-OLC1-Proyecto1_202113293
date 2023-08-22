@@ -21,9 +21,7 @@ import java_cup.runtime.*;
 // ------> Expresiones Regulares 
 
 doubles = [0-9]+"."[0-9]+
-IDENTIFICADOR = [a-zA-Z][a-zA-Z0-9]+([a-zA-Z][a-zA-Z0-9]+" ")*
-
-string = "\"" {IDENTIFICADOR}+ "\""
+string = \" ([^\"] | "\\\"")+ \"
 
 
 
