@@ -29,13 +29,13 @@ public class sym {
   public static final int DIV = 17;
   public static final int MAIN = 33;
   public static final int IF = 34;
-  public static final int ID = 44;
+  public static final int ID = 45;
   public static final int PUNTO_COMA = 7;
   public static final int EOF = 0;
   public static final int error = 1;
   public static final int M_IGUAL = 20;
   public static final int COMA = 9;
-  public static final int CADENA = 45;
+  public static final int CADENA = 46;
   public static final int MENOS = 15;
   public static final int MENOR = 19;
   public static final int BREAK = 37;
@@ -52,6 +52,7 @@ public class sym {
   public static final int DOSP = 8;
   public static final int STRING = 32;
   public static final int DOLAR = 12;
+  public static final int VAR = 44;
   public static final int DO = 43;
   public static final int MAS = 14;
   public static final String[] terminalNames = new String[] {
@@ -99,6 +100,7 @@ public class sym {
   "DEFAULT",
   "CASE",
   "DO",
+  "VAR",
   "ID",
   "CADENA"
   };

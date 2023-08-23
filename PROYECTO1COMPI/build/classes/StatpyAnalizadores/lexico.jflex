@@ -74,6 +74,8 @@ COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 "char"      {return new Symbol(sym.CHAR, yycolumn, yyline, yytext());}
 "bool"      {return new Symbol(sym.BOOL, yycolumn, yyline, yytext());}
 "string"    {return new Symbol(sym.STRING, yycolumn, yyline, yytext());}
+
+"var"       {return new Symbol(sym.VAR, yycolumn, yyline, yytext());}
 "main"      {return new Symbol(sym.MAIN, yycolumn, yyline, yytext());}
 "if"        {return new Symbol(sym.IF, yycolumn, yyline, yytext());}
 "else"      {return new Symbol(sym.ELSE, yycolumn, yyline, yytext());}

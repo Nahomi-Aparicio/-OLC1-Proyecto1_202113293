@@ -33,87 +33,62 @@ action code
 terminal String ENTERO,PARENTESIS_A,PARENTESIS_C,LLAVE_A,LLAVE_C,PUNTO_COMA,DOSP,COMA,CORCHETE_A,
 CORCHETE_C,DOLAR,IGUAL,MAS,MENOS,POR,DIV,MAYOR,MENOR,M_IGUAL,ENOR_IGUAL,
 IGUALIGUAL,DIFERENTE,AND,OR,NOT,VOID,INT,DOUBLE,CHAR,BOOL,STRING,MAIN,IF,
-ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO, 
+ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO,VAR, 
 ID,CADENA;
 
 
 //------> Declaración de no terminales
 
-non terminal inicio, cuerpo,mascuerpo,
-expresion,datos,expresiones,
-Controlif,unif,unelse,sentenciaif,cuerpodelif,
- relacion,imprimir,sentenciaIm,otrasentencia
- ;
+non terminal inicio,lista_Inst,instruccion,declaracionVar,dato,Expresion,
+ aritmeico,operacion,numero;
+
+
+//------> PRECEDENCIA
+precedence left MAS,MENOS,POR,DIV;
+
 
 
 //------> Definir Simbolo Inicial
 start with inicio; 
 
 
-// ------------>  Producciones  <------------
-
-inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A  cuerpo LLAVE_C
-;
-
-cuerpo::= cuerpo mascuerpo
-        |mascuerpo
-;
-
-mascuerpo::=expresion
-          |Controlif
-         
+inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A lista_Inst  LLAVE_C
         ;
 
-expresion::= datos ID IGUAL expresiones PUNTO_COMA  
-            |ID IGUAL expresiones PUNTO_COMA 
-            ;
+lista_Inst::=lista_Inst instruccion
+            |instruccion
+        ;
+instruccion::= declaracionVar 
+        ;
 
-datos::= INT
-        |DOUBLE
-        |CHAR
-        |BOOL
-        |STRING
+declaracionVar::=dato ID IGUAL Expresion  PUNTO_COMA
+            |dato ID PUNTO_COMA
+        ;
+dato::=INT
+    |DOUBLE
+    |CHAR
+    |BOOL
+    |STRING
+    |VAR
+        ;
+
+Expresion::= aritmeico
+            |ID
+            |STRING
+           
+;
+
+aritmeico::= aritmeico operacion
+    |operacion
     ;
 
-expresiones::= ENTERO
-            |CADENA
-        ;
+operacion::=operacion MENOS operacion
+        |operacion POR operacion
+        |operacion DIV operacion
+        |operacion MAS operacion
+        |numero
+    ;
 
- Controlif::== unif unelse
-            |unif 
-        ;
-
-unif::= IF PARENTESIS_A sentenciaif PARENTESIS_C LLAVE_A cuerpodelif LLAVE_C
-        ;
-
-
-sentenciaif::= ID relacion ID
-        ;
-
-relacion::= MAYOR
-           |MENOR
-           |M_IGUAL
-           |ENOR_IGUAL
-           |IGUALIGUAL           
-        ;
-
-cuerpodelif::=imprimir
-        |expresion
-               
-        ;
-
-unelse::= ELSE IF PARENTESIS_A sentenciaif PARENTESIS_C LLAVE_A cuerpodelif LLAVE_C
-        ;
-
-imprimir::=CONSOL PARENTESIS_A  sentenciaIm PARENTESIS_C PUNTO_COMA;
-
-sentenciaIm::= sentenciaIm otrasentencia
-            |otrasentencia
-            ;
-
-
-otrasentencia::= MAS otrasentencia
-            |CADENA
-            |ID
-            |ENTERO
-            ;
+numero ::=ENTERO
+        
+;
