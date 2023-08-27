@@ -33,62 +33,139 @@ action code
 terminal String ENTERO,PARENTESIS_A,PARENTESIS_C,LLAVE_A,LLAVE_C,PUNTO_COMA,DOSP,COMA,CORCHETE_A,
 CORCHETE_C,DOLAR,IGUAL,MAS,MENOS,POR,DIV,MAYOR,MENOR,M_IGUAL,ENOR_IGUAL,
 IGUALIGUAL,DIFERENTE,AND,OR,NOT,VOID,INT,DOUBLE,CHAR,BOOL,STRING,MAIN,IF,
-ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO,VAR, 
+ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO,VAR,DECIMAL,TRUE,FALSE,
 ID,CADENA;
 
 
 //------> Declaración de no terminales
 
-non terminal inicio,lista_Inst,instruccion,declaracionVar,dato,Expresion,
- aritmeico,operacion,numero;
+non terminal inicio,lista_Inst,instruccion,declaracionVar,Expresion,
+datoint,datostring,datodouble,datochar,datobool,datovar,
+ifif,unif,unelse,elsee,imprimir,elstring,operadores,relacion,logico,unwhile,unacadena;
+
 
 
 //------> PRECEDENCIA
 precedence left MAS,MENOS,POR,DIV;
-
+precedence left AND, OR, NOT;
+precedence left MAYOR, MENOR ,M_IGUAL,ENOR_IGUAL, IGUALIGUAL, DIFERENTE;
 
 
 //------> Definir Simbolo Inicial
 start with inicio; 
 
 
-inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A lista_Inst  LLAVE_C
+inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A lista_Inst  LLAVE_C        
         ;
 
-lista_Inst::=lista_Inst instruccion
-            |instruccion
+lista_Inst::= instruccion lista_Inst 
+            |instruccion    
         ;
-instruccion::= declaracionVar 
-        ;
-
-declaracionVar::=dato ID IGUAL Expresion  PUNTO_COMA
-            |dato ID PUNTO_COMA
-        ;
-dato::=INT
-    |DOUBLE
-    |CHAR
-    |BOOL
-    |STRING
-    |VAR
+instruccion::= declaracionVar  
+            |ifif
+            |imprimir
+            |unwhile
         ;
 
-Expresion::= aritmeico
-            |ID
-            |STRING
-           
+
+//--------------------------DECLARACION DE VARIABLES -------------------------------------> 
+declaracionVar::=datoint:a              {:RESULT=a; System.out.println("int "+a); :}
+            |datostring:a               {:RESULT=a; System.out.println("string "+a); :}
+            |datodouble:a               {:RESULT=a; System.out.println("double "+a); :}
+            |datochar:a                 {:RESULT=a; System.out.println("char "+a); :}
+            |datobool:a                 {:RESULT=a; System.out.println("bool "+a); :}
+            |datovar:a                  {:RESULT=a; System.out.println("var "+a); :}
+        ;
+
+datoint::= INT ID:a IGUAL Expresion:b  PUNTO_COMA             {:RESULT=a+"="+b;:}
+        |INT ID:a PUNTO_COMA                                  {:RESULT=a;:}   
 ;
 
-aritmeico::= aritmeico operacion
-    |operacion
-    ;
 
-operacion::=operacion MENOS operacion
-        |operacion POR operacion
-        |operacion DIV operacion
-        |operacion MAS operacion
-        |numero
-    ;
-
-numero ::=ENTERO
-        
+datodouble::= DOUBLE ID:a IGUAL Expresion:b  PUNTO_COMA       {:RESULT=a+"="+b;:}
+        |DOUBLE ID:a PUNTO_COMA                               {:RESULT=a;:}            
 ;
+datochar::= CHAR ID:a IGUAL Expresion:b  PUNTO_COMA           {:RESULT=a+"="+b;:}
+        |CHAR ID:a PUNTO_COMA                                 {:RESULT=a;:}}
+;
+
+datostring::= STRING ID:a IGUAL Expresion:b  PUNTO_COMA       {:RESULT=a+"="+b;:}
+        |STRING ID:a PUNTO_COMA                               {:RESULT=a;:}
+;
+datobool::= BOOL ID:a IGUAL Expresion:b  PUNTO_COMA           {:RESULT=a+"="+b;:}
+        |BOOL ID:a PUNTO_COMA                                 {:RESULT=a;:}
+;
+
+datovar::= VAR ID IGUAL Expresion  PUNTO_COMA
+        |VAR ID PUNTO_COMA
+;
+Expresion::=Expresion:a MENOS Expresion:b       {: RESULT = a + " - " + b; :}
+        |Expresion:a POR Expresion:b            {: RESULT = a + " *" + b; :}
+        |Expresion:a DIV Expresion:b            {: RESULT = a + " / " + b; :}
+        |Expresion:a MAS Expresion:b            {: RESULT = a + " + " + b; :}
+        |ENTERO:a                               {:RESULT=a;:}
+        |CADENA:a                               {:RESULT=a;:}
+        |DECIMAL:a                              {:RESULT=a;:}
+        |ID:a                                   {:RESULT=a;:}
+        |TRUE:a                                 {:RESULT=a;:}
+        |FALSE:a                                {:RESULT=a;:}
+    ;
+
+
+//--------------------------IMPRIMIR -------------------------------------> 
+imprimir::=CONSOL PARENTESIS_A  elstring:a PARENTESIS_C PUNTO_COMA       {:System.out.println("print(" + a + ")" ); :}
+
+;         
+
+elstring::=elstring unacadena:a                  {:RESULT=a;:}
+        |unacadena:a                             {:RESULT=a;:}
+    ;
+
+unacadena::= unacadena:a MAS unacadena:b        {: RESULT = a + " , " + b; :}
+        |ID:a                                   {:RESULT=a;:}
+        |CADENA:a                               {:RESULT=a;:}
+    ;
+
+//--------------------------Sentencias IF-------------------------------------> 
+ifif::=unif unelse
+    |unif
+;
+
+unif::= IF  PARENTESIS_A operadores:a PARENTESIS_C   LLAVE_A lista_Inst LLAVE_C {:RESULT = a; System.out.println("if "+a+"{"); :}
+    ;  
+
+
+unelse::=unelse elsee 
+        |elsee
+    ;
+
+elsee::=ELSE IF  PARENTESIS_A operadores:a PARENTESIS_C  LLAVE_A lista_Inst LLAVE_C {:RESULT = a; System.out.println("elif "+a+"{"); :}
+;
+
+//--------------------------OPERADORES  DE RELACION-------------------------------------> 
+
+operadores::=operadores:a logico:b operadores:c   {:RESULT = a + " "+ b+" " + c; :}
+        |relacion:a                               {: RESULT = a;:}
+        ;
+
+relacion::= relacion:a MAYOR relacion:b     {: RESULT = a + ">" + b; :}
+        |relacion:a MENOR relacion:b        {: RESULT = a + "<" + b; :}
+        |relacion:a M_IGUAL relacion:b      {: RESULT = a + ">=" + b; :}
+        |relacion:a ENOR_IGUAL relacion:b   {: RESULT = a + "<=" + b; :}
+        |relacion:a IGUALIGUAL relacion:b   {: RESULT = a + "==" + b; :}
+        |relacion:a DIFERENTE relacion:b    {: RESULT = a + "!=" + b; :}
+        |ENTERO:a                           {:RESULT=a;:}       
+        |CADENA:a                           {:RESULT=a;:}    
+        |DECIMAL:a                          {:RESULT=a;:}     
+        |ID:a                               {:RESULT=a;:}     
+    ;
+//--------------------------OPERADORES  LOGICOS-------------------------------------> 
+logico::=AND:a                              {:RESULT=a;:}                
+        |OR:a                               {:RESULT=a;:}
+        |NOT:a                              {:RESULT=a;:}    
+    ;
+
+//-----------------------------WHILE----------------------------------> 
+
+unwhile::=WHILE PARENTESIS_A operadores:a PARENTESIS_C LLAVE_A lista_Inst:b LLAVE_C {:RESULT = a; System.out.println("while "+a+":\n"+b); :}
+        ;

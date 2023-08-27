@@ -23,6 +23,7 @@ import java_cup.runtime.*;
 
 CADENA = \" ([^\"] | "\\\"")+ \"
 entero = [0-9]+
+DECIMAL = [0-9]+("."[  |0-9]+)?
 ID = [a-zA-Z_][a-zA-Z0-9_]*
 //----> COMENTARIOS
 COMENT_S = "//" .*
@@ -87,12 +88,15 @@ COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 "default"   {return new Symbol(sym.DEFAULT, yycolumn, yyline, yytext());}    
 "case"      {return new Symbol(sym.CASE, yycolumn, yyline, yytext());}
 "do"        {return new Symbol(sym.DO, yycolumn, yyline, yytext());}
+"true"      {return new Symbol(sym.TRUE, yycolumn, yyline, yytext());}
+"false"     {return new Symbol(sym.FALSE, yycolumn, yyline, yytext());}
 
 //----> palabras reservadas para graficas falta preguntarle al aux
 
 
 // ------>   LEXICOS
 {entero}     { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext()); }
+{DECIMAL}      {return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext());}
 
 {ID}         { return new Symbol(sym.ID, yycolumn, yyline, yytext()); }
 {CADENA}   { return new Symbol(sym.CADENA, yycolumn, yyline, yytext()); }
