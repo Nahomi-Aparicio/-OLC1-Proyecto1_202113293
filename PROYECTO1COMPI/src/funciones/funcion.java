@@ -13,7 +13,9 @@ import javax.swing.JOptionPane;
  */
 public class funcion {
    public static LinkedList<Object> ListaT = new LinkedList<>();
-    
+    //--> funciones.funcion.ListaT.add(new Tokens(yytext() ,"punto_coma" ,yyline ,yycolumn)); PARA LA TABLA DE TOKENS 
+
+
     public static void mostrar (String expresion){
         JOptionPane.showMessageDialog(null, expresion);
     }

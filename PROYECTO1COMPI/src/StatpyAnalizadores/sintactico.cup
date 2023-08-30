@@ -21,6 +21,19 @@ parser code
             System.err.println("Error Sintactico: "+ s.value + " - Fila: " + s.right + " - Columna: " + s.left + ". Sin recuperacion." );
     }
 
+    //metodo para la tabilacion de los if -------------------------->
+    public String indent(String text, int tabs) {
+        String[] lines = text.split("\n");
+        StringBuilder result = new StringBuilder();
+        String tabPrefix = "";
+        for (int i = 0; i < tabs; i++) {
+            tabPrefix += "\t";
+        }
+        for (String line : lines) {
+            result.append(tabPrefix).append(line).append("\n");
+        }
+        return result.toString();
+    }
 :}
 
 
@@ -32,74 +45,79 @@ action code
 //------> Declaración de terminales
 terminal String ENTERO,PARENTESIS_A,PARENTESIS_C,LLAVE_A,LLAVE_C,PUNTO_COMA,DOSP,COMA,CORCHETE_A,
 CORCHETE_C,DOLAR,IGUAL,MAS,MENOS,POR,DIV,MAYOR,MENOR,M_IGUAL,ENOR_IGUAL,
-IGUALIGUAL,DIFERENTE,AND,OR,NOT,VOID,INT,DOUBLE,CHAR,BOOL,STRING,MAIN,IF,
-ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO,VAR,DECIMAL,TRUE,FALSE,
+IGUALIGUAL,DIFERENTE,AND,OR,NOT,VOID,INT,DOUBLE,CHAR,BOOL,STRING,MAIN,IF,MASMAS,MENOSMENOS,
+ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO,VAR,DECIMAL,TRUE,FALSE,CHARI,
 ID,CADENA;
 
 
 //------> Declaración de no terminales
 
 non terminal inicio,lista_Inst,instruccion,declaracionVar,Expresion,
-datoint,datostring,datodouble,datochar,datobool,datovar,
-ifif,unif,unelse,elsee,imprimir,elstring,operadores,relacion,logico,unwhile,unacadena;
+datoint,vari,unswitch,uncaso,otrocaso,casodefalut,unbreak,undo,unaexpmas,
+ifif,unif,unelse,elsee,imprimir,elstring,operadores,relacion,logico,unwhile,unacadena,
+unfor,datofor,unosfor,relacionFor,unaexpmasfor;
 
 
 
 //------> PRECEDENCIA
+precedence left MASMAS,MENOSMENOS;
 precedence left MAS,MENOS,POR,DIV;
+
 precedence left AND, OR, NOT;
 precedence left MAYOR, MENOR ,M_IGUAL,ENOR_IGUAL, IGUALIGUAL, DIFERENTE;
+
 
 
 //------> Definir Simbolo Inicial
 start with inicio; 
 
+//-;System.out.println(a);
+//FALTA LOS BREAK EN LOS IF  Y WHILE y el valor del switch  preguntar al aux de lo de el b++
 
-inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A lista_Inst  LLAVE_C        
+inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A lista_Inst:a  LLAVE_C    
+ {:funciones.Traduccion.TraduccionPy.add("def main (): \n" +a.toString() + "\n if__name__ = \"__main__\": \n main()" + "\n");:}   
         ;
 
-lista_Inst::= instruccion lista_Inst 
-            |instruccion    
+lista_Inst::= instruccion:a lista_Inst:b      {:RESULT = a +"\n"+ b ; :}  
+            |instruccion:a                        {:RESULT=a;:}
         ;
-instruccion::= declaracionVar  
-            |ifif
-            |imprimir
-            |unwhile
-        ;
+instruccion::= declaracionVar:a      {:RESULT=a;:}           
+            |ifif:a                  {:RESULT=a;:}
+            |imprimir:a              {:RESULT=a;:}               
+            |unwhile:a               {:RESULT=a;:} 
+            |unswitch:a              {:RESULT=a;:}
+            |undo:a                  {:RESULT=a;:}
+            |unaexpmas:a             {:RESULT=a;:}
+            |unfor:a                 {:RESULT=a;:}
+            
+;
 
 
 //--------------------------DECLARACION DE VARIABLES -------------------------------------> 
-declaracionVar::=datoint:a              {:RESULT=a; System.out.println("int "+a); :}
-            |datostring:a               {:RESULT=a; System.out.println("string "+a); :}
-            |datodouble:a               {:RESULT=a; System.out.println("double "+a); :}
-            |datochar:a                 {:RESULT=a; System.out.println("char "+a); :}
-            |datobool:a                 {:RESULT=a; System.out.println("bool "+a); :}
-            |datovar:a                  {:RESULT=a; System.out.println("var "+a); :}
+declaracionVar::=datoint:a          {:RESULT=a;:}
+            
         ;
 
-datoint::= INT ID:a IGUAL Expresion:b  PUNTO_COMA             {:RESULT=a+"="+b;:}
-        |INT ID:a PUNTO_COMA                                  {:RESULT=a;:}   
+datoint::= vari ID:a IGUAL Expresion:b  PUNTO_COMA   {:RESULT=" "+a+"="+b;:}          
+        |vari ID:a PUNTO_COMA                        {:RESULT=" "+a;:} 
+        |ID IGUAL Expresion:a PUNTO_COMA                  {:RESULT=" ="+a;:} 
 ;
 
+vari::=INT:a                         {:RESULT=a;:}  
+        |DOUBLE:a                    {:RESULT=a;:} 
+        |CHAR:a                      {:RESULT=a;:} 
+        |BOOL:a                      {:RESULT=a;:}
+        |STRING:a                    {:RESULT=a;:}
+        |VAR:a                       {:RESULT=a;:}
+    ;
 
-datodouble::= DOUBLE ID:a IGUAL Expresion:b  PUNTO_COMA       {:RESULT=a+"="+b;:}
-        |DOUBLE ID:a PUNTO_COMA                               {:RESULT=a;:}            
-;
-datochar::= CHAR ID:a IGUAL Expresion:b  PUNTO_COMA           {:RESULT=a+"="+b;:}
-        |CHAR ID:a PUNTO_COMA                                 {:RESULT=a;:}}
-;
 
-datostring::= STRING ID:a IGUAL Expresion:b  PUNTO_COMA       {:RESULT=a+"="+b;:}
-        |STRING ID:a PUNTO_COMA                               {:RESULT=a;:}
-;
-datobool::= BOOL ID:a IGUAL Expresion:b  PUNTO_COMA           {:RESULT=a+"="+b;:}
-        |BOOL ID:a PUNTO_COMA                                 {:RESULT=a;:}
-;
+unaexpmas::=ID:a MASMAS PUNTO_COMA              {:RESULT=a+"++";:}
+        |ID:a MENOSMENOS PUNTO_COMA             {:RESULT=a+"--";:}
+        ;
 
-datovar::= VAR ID IGUAL Expresion  PUNTO_COMA
-        |VAR ID PUNTO_COMA
-;
-Expresion::=Expresion:a MENOS Expresion:b       {: RESULT = a + " - " + b; :}
+Expresion::=Expresion:a MENOS Expresion:b       {: RESULT = a + " - " + b; :}        
+        |MENOS ENTERO:a                         {:RESULT="-"+a;:}
         |Expresion:a POR Expresion:b            {: RESULT = a + " *" + b; :}
         |Expresion:a DIV Expresion:b            {: RESULT = a + " / " + b; :}
         |Expresion:a MAS Expresion:b            {: RESULT = a + " + " + b; :}
@@ -109,43 +127,47 @@ Expresion::=Expresion:a MENOS Expresion:b       {: RESULT = a + " - " + b; :}
         |ID:a                                   {:RESULT=a;:}
         |TRUE:a                                 {:RESULT=a;:}
         |FALSE:a                                {:RESULT=a;:}
+        |CHARI ID:a CHARI                         {:RESULT="'"+a+"'";:}
+        
+        
     ;
 
 
 //--------------------------IMPRIMIR -------------------------------------> 
-imprimir::=CONSOL PARENTESIS_A  elstring:a PARENTESIS_C PUNTO_COMA       {:System.out.println("print(" + a + ")" ); :}
+imprimir::=CONSOL PARENTESIS_A  elstring:a PARENTESIS_C PUNTO_COMA     {:RESULT="print("+a+")";:} 
 
 ;         
 
-elstring::=elstring unacadena:a                  {:RESULT=a;:}
-        |unacadena:a                             {:RESULT=a;:}
+elstring::=elstring:a unacadena:b           {:RESULT=a+""+b;:}        
+        |unacadena:a                        {:RESULT=a;:}     
     ;
 
-unacadena::= unacadena:a MAS unacadena:b        {: RESULT = a + " , " + b; :}
+unacadena::= unacadena:a MAS unacadena:b        {:RESULT=a+" , "+b;:}    
         |ID:a                                   {:RESULT=a;:}
         |CADENA:a                               {:RESULT=a;:}
     ;
 
 //--------------------------Sentencias IF-------------------------------------> 
-ifif::=unif unelse
-    |unif
+ifif::=unif:a unelse:b    {:RESULT=a+""+b;:} 
+    |unif:a               {:RESULT=a;:}
 ;
 
-unif::= IF  PARENTESIS_A operadores:a PARENTESIS_C   LLAVE_A lista_Inst LLAVE_C {:RESULT = a; System.out.println("if "+a+"{"); :}
+unif::= IF  PARENTESIS_A operadores:a PARENTESIS_C   LLAVE_A lista_Inst:b LLAVE_C {:RESULT="if "+a+":\n"+indent(b.toString(), 1);:}
+
     ;  
 
 
-unelse::=unelse elsee 
-        |elsee
+unelse::=unelse:a elsee:b   {:RESULT=a+""+b;:}
+        |elsee:a            {:RESULT=a;:}  
     ;
 
-elsee::=ELSE IF  PARENTESIS_A operadores:a PARENTESIS_C  LLAVE_A lista_Inst LLAVE_C {:RESULT = a; System.out.println("elif "+a+"{"); :}
+elsee::=ELSE IF  PARENTESIS_A operadores:a PARENTESIS_C  LLAVE_A lista_Inst:b LLAVE_C {:RESULT="elif "+a+":\n"+indent(b.toString(), 1);:}
 ;
 
 //--------------------------OPERADORES  DE RELACION-------------------------------------> 
 
-operadores::=operadores:a logico:b operadores:c   {:RESULT = a + " "+ b+" " + c; :}
-        |relacion:a                               {: RESULT = a;:}
+operadores::=operadores:a logico:b operadores:c           {:RESULT=a+" "+b+" "+c;:}
+        |relacion:a                                           {:RESULT=a;:}
         ;
 
 relacion::= relacion:a MAYOR relacion:b     {: RESULT = a + ">" + b; :}
@@ -160,12 +182,66 @@ relacion::= relacion:a MAYOR relacion:b     {: RESULT = a + ">" + b; :}
         |ID:a                               {:RESULT=a;:}     
     ;
 //--------------------------OPERADORES  LOGICOS-------------------------------------> 
-logico::=AND:a                              {:RESULT=a;:}                
-        |OR:a                               {:RESULT=a;:}
-        |NOT:a                              {:RESULT=a;:}    
+logico::=AND                              {:RESULT="and";:}                
+        |OR                               {:RESULT="or";:}
+        |NOT                              {:RESULT="not;:}    
     ;
 
 //-----------------------------WHILE----------------------------------> 
 
-unwhile::=WHILE PARENTESIS_A operadores:a PARENTESIS_C LLAVE_A lista_Inst:b LLAVE_C {:RESULT = a; System.out.println("while "+a+":\n"+b); :}
+unwhile::=WHILE PARENTESIS_A operadores:a PARENTESIS_C LLAVE_A lista_Inst:b LLAVE_C {:RESULT="while "+a+":\n"+indent(b.toString(), 1);:}
+        ;
+
+//-----------------------------SWITCH----------------------------------> 
+unswitch::=SWITCH PARENTESIS_A PARENTESIS_C LLAVE_A uncaso:a LLAVE_C    
+{:RESULT="def switch("+"):\n switcher = {\n"+a+"\n}";:} 
+    ;
+
+
+uncaso::=uncaso:a otrocaso:b            {:RESULT=a+""+indent(b.toString(), 1);:}
+        |otrocaso:a                     {:RESULT=indent(a.toString(), 1);:}     
+    ;
+
+
+otrocaso::= CASE ENTERO:a DOSP lista_Inst:b                       {:RESULT=a+": "+b+",\n";:} 
+        |CASE ENTERO:a DOSP lista_Inst:b    unbreak               {:RESULT=a+": "+b+",\n";:}  
+        |casodefalut:a                                            {:RESULT=a;:}      
+    ;
+
+casodefalut::=DEFAULT DOSP lista_Inst:b                           {:RESULT="n:"+b+",";:}          
+    ;
+unbreak::=BREAK PUNTO_COMA
+    ;
+
+
+
+//-----------------------------DO---------------------------------->
+
+undo::= DO LLAVE_A lista_Inst:a  LLAVE_C WHILE PARENTESIS_A operadores:b PARENTESIS_C PUNTO_COMA     
+           {:RESULT="while True:\n"+indent(a.toString(), 1)+"\n       if ("+b+"):\n       break";:} 
+        ;
+
+//------------------------------FOR------------------------------>
+unfor::= FOR PARENTESIS_A unosfor:a PARENTESIS_C LLAVE_A lista_Inst:b LLAVE_C     
+       {:RESULT="for "+a+""+indent(b.toString(), 1);:} 
+    ;
+
+unosfor::= datofor:b relacionFor:c unaexpmasfor:a
+          {:RESULT= a+" in range("+b+","+c+"):\n ";:}
+    ;
+
+datofor::= INT ID IGUAL ENTERO:a PUNTO_COMA
+            {:RESULT=a;:}
+       
+    ;
+
+relacionFor::= ID MAYOR ENTERO:a  PUNTO_COMA     {:RESULT=a;:}
+        |ID MENOR ENTERO:a   PUNTO_COMA          {:RESULT=a;:}
+        |ID M_IGUAL ENTERO:a   PUNTO_COMA        {:RESULT=a;:}
+        |ID ENOR_IGUAL ENTERO:a PUNTO_COMA       {:RESULT=a;:}
+
+    ;
+
+unaexpmasfor::=ID:a MASMAS      {:RESULT=a;:}     
+        |ID:a MENOSMENOS        {:RESULT=a;:}     
         ;

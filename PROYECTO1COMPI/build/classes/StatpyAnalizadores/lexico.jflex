@@ -28,6 +28,7 @@ ID = [a-zA-Z_][a-zA-Z0-9_]*
 //----> COMENTARIOS
 COMENT_S = "//" .*
 COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
+CHARI=\'
 
 %%
 // ------------  Reglas Lexicas -------------------
@@ -45,6 +46,8 @@ COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 "]"       {return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext());}
 "$"       {return new Symbol(sym.DOLAR, yycolumn, yyline, yytext());}
 "=="      {return new Symbol(sym.IGUALIGUAL, yycolumn, yyline, yytext());}
+"++"      {return new Symbol(sym.MASMAS, yycolumn, yyline, yytext());}
+"--"      {return new Symbol(sym.MENOSMENOS, yycolumn, yyline, yytext());}
 
 "="       {return new Symbol(sym.IGUAL, yycolumn, yyline, yytext());}
 
@@ -90,6 +93,7 @@ COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 "do"        {return new Symbol(sym.DO, yycolumn, yyline, yytext());}
 "true"      {return new Symbol(sym.TRUE, yycolumn, yyline, yytext());}
 "false"     {return new Symbol(sym.FALSE, yycolumn, yyline, yytext());}
+"break"     {return new Symbol(sym.BREAK, yycolumn, yyline, yytext());}
 
 //----> palabras reservadas para graficas falta preguntarle al aux
 
@@ -100,6 +104,7 @@ COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 
 {ID}         { return new Symbol(sym.ID, yycolumn, yyline, yytext()); }
 {CADENA}   { return new Symbol(sym.CADENA, yycolumn, yyline, yytext()); }
+{CHARI}          { return new Symbol(sym.CHARI, yycolumn, yyline, yytext()); }
 
 
 
