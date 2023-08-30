@@ -75,7 +75,7 @@ start with inicio;
 //FALTA LOS BREAK EN LOS IF  Y WHILE y el valor del switch  preguntar al aux de lo de el b++
 
 inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A lista_Inst:a  LLAVE_C    
- {:funciones.Traduccion.TraduccionPy.add("def main (): \n" +a.toString() + "\n if__name__ = \"__main__\": \n main()" + "\n");:}   
+ {:funciones.Traduccion.TraduccionPy.add("def main (): \n" +a.toString() + "\n\n if__name__ = \"__main__\": \n main()" + "\n");:}   
         ;
 
 lista_Inst::= instruccion:a lista_Inst:b      {:RESULT = a +"\n"+ b ; :}  
@@ -184,7 +184,7 @@ relacion::= relacion:a MAYOR relacion:b     {: RESULT = a + ">" + b; :}
 //--------------------------OPERADORES  LOGICOS-------------------------------------> 
 logico::=AND                              {:RESULT="and";:}                
         |OR                               {:RESULT="or";:}
-        |NOT                              {:RESULT="not;:}    
+        |NOT                              {:RESULT="not";:}    
     ;
 
 //-----------------------------WHILE----------------------------------> 

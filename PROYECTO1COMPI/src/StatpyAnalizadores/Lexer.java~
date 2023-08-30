@@ -847,7 +847,8 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 59: break;
           case 6:
-            { return new Symbol(sym.PARENTESIS_A, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat("(","PARENTESIS_A",yyline,yycolumn));
+            return new Symbol(sym.PARENTESIS_A, yycolumn, yyline, yytext());
             }
           // fall through
           case 60: break;

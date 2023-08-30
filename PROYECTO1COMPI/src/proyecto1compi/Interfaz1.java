@@ -4,6 +4,7 @@
  */
 package proyecto1compi;
 
+import funciones.TokensStat;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -220,6 +221,15 @@ public static boolean EsStay =false;
     }// </editor-fold>//GEN-END:initComponents
 
     private void ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteActionPerformed
+        //LISTA PARA LA GENERACION DE TOKENS
+        LinkedList<TokensStat> tokensList = funciones.info.ListaTokensStat;
+        
+         String outputPath = "output.html";
+        // Generar el HTML utilizando la clase HTMLGenerator
+        funciones.HTMLGenerator.generateHTMLFromTokensList(tokensList, outputPath);
+         
+
+
     }//GEN-LAST:event_ReporteActionPerformed
 
     private void AnalizadoresbotnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalizadoresbotnActionPerformed
@@ -367,24 +377,31 @@ public static boolean EsStay =false;
           
     }else if (seleccionAnalisis=="Analizador StatPy"){
         System.out.println("Aqui va lo statpy");
-    //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
-          String Texto_enlaentrada = Entrada.getText();
-          analizarStay(Texto_enlaentrada);
+        
+        //--------------------------ANALIZADOR CUP Y FLEX         
+        //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
+        
+        //OBTENGO EL TXTO DE LA ENTRADA 
+          String Texto_enlaentrada = Entrada.getText();   
+          analizarStay(Texto_enlaentrada); 
           
-        String listaSinCorchetes = String.join(", ", lista); 
+        //LISTA DE LA TRADUCCION
+          String listaSinCorchetes = String.join(", ", lista);         
+          System.out.println(listaSinCorchetes);
+          Salida.setText(listaSinCorchetes);
         
-        System.out.println(listaSinCorchetes);
-        Salida.setText(listaSinCorchetes);
-              
-        
+       
+        //MUESTRO LOS TOKENS ASI TRANKI 
+        funciones.info.ListaTokensStat.forEach((elemento)->{      
+        System.out.println(elemento);
+       
+           });
+         
     }
         
     //funciones.funcion.mostrar("holi");      
       //ESTO ES PARA LA TABLA DE TOKENS AUN FALTA PERO ESTA CASI EL COMO HACERLO 
-     /* funciones.funcion.ListaT.forEach((elemento)->{      
-        System.out.println(elemento);
-        System.out.println(funciones.funcion.ListaT);
-    });*/
+     /* ;*/
       
     }//GEN-LAST:event_EjecutarActionPerformed
 

@@ -472,7 +472,7 @@ class CUP$Parser$actions {
 		int aleft = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).left;
 		int aright = ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-1)).right;
 		Object a = (Object)((java_cup.runtime.Symbol) CUP$Parser$stack.elementAt(CUP$Parser$top-1)).value;
-		funciones.Traduccion.TraduccionPy.add("def main (): \n" +a.toString() + "\n if__name__ = \"__main__\": \n main()" + "\n");
+		funciones.Traduccion.TraduccionPy.add("def main (): \n" +a.toString() + "\n\n if__name__ = \"__main__\": \n main()" + "\n");
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("inicio",0, ((java_cup.runtime.Symbol)CUP$Parser$stack.elementAt(CUP$Parser$top-6)), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
@@ -1255,7 +1255,7 @@ class CUP$Parser$actions {
           case 62: // logico ::= NOT 
             {
               Object RESULT =null;
-		RESULT="not;
+		RESULT="not";
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("logico",22, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;
