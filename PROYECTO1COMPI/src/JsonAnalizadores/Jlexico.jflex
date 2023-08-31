@@ -34,14 +34,25 @@ COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 
 
 //---------------------> simbolos
-"{"       {return new Symbol(sym.LLAVE_AA, yycolumn, yyline, yytext());}
-"}"       {return new Symbol(sym.LLAVE_CC, yycolumn, yyline, yytext());}
-":"       {return new Symbol(sym.DOSP, yycolumn, yyline, yytext());}
-","       {return new Symbol(sym.COMA, yycolumn, yyline, yytext());}
+"{"       {funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"LLAVE_AA",yyline,yycolumn));
+            return new Symbol(sym.LLAVE_AA, yycolumn, yyline, yytext());}
+
+"}"       {funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"LLAVE_CC",yyline,yycolumn));
+            return new Symbol(sym.LLAVE_CC, yycolumn, yyline, yytext());}
+
+":"       {funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"DOSP",yyline,yycolumn));
+            return new Symbol(sym.DOSP, yycolumn, yyline, yytext());}
+
+
+","       {funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"COMA",yyline,yycolumn));
+            return new Symbol(sym.COMA, yycolumn, yyline, yytext());}
 
 // ------> Expresiones Regulares 
-{doubles}  { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }
-{string}  { return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }
+{doubles}  { funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"DOUBLE",yyline,yycolumn));
+            return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext()); }
+
+{string}  {  funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"STRING",yyline,yycolumn));
+            return new Symbol(sym.STRING, yycolumn, yyline, yytext()); }
 
 
 

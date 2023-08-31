@@ -722,22 +722,26 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 11: break;
           case 3:
-            { return new Symbol(sym.COMA, yycolumn, yyline, yytext());
+            { funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"COMA",yyline,yycolumn));
+            return new Symbol(sym.COMA, yycolumn, yyline, yytext());
             }
           // fall through
           case 12: break;
           case 4:
-            { return new Symbol(sym.DOSP, yycolumn, yyline, yytext());
+            { funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"DOSP",yyline,yycolumn));
+            return new Symbol(sym.DOSP, yycolumn, yyline, yytext());
             }
           // fall through
           case 13: break;
           case 5:
-            { return new Symbol(sym.LLAVE_AA, yycolumn, yyline, yytext());
+            { funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"LLAVE_AA",yyline,yycolumn));
+            return new Symbol(sym.LLAVE_AA, yycolumn, yyline, yytext());
             }
           // fall through
           case 14: break;
           case 6:
-            { return new Symbol(sym.LLAVE_CC, yycolumn, yyline, yytext());
+            { funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"LLAVE_CC",yyline,yycolumn));
+            return new Symbol(sym.LLAVE_CC, yycolumn, yyline, yytext());
             }
           // fall through
           case 15: break;
@@ -747,12 +751,14 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 16: break;
           case 8:
-            { return new Symbol(sym.STRING, yycolumn, yyline, yytext());
+            { funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"STRING",yyline,yycolumn));
+            return new Symbol(sym.STRING, yycolumn, yyline, yytext());
             }
           // fall through
           case 17: break;
           case 9:
-            { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext());
+            { funciones.info.listaTokensJSon.add(new funciones.TokensJson(yytext(),"DOUBLE",yyline,yycolumn));
+            return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext());
             }
           // fall through
           case 18: break;

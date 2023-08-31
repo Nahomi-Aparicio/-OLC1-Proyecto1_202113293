@@ -3,13 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package funciones;
-import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
 
-public class HTMLGenerator {
-    public static void generateHTMLFromTokensList(LinkedList<TokensStat> tokensList, String outputPath) {
+import java.util.LinkedList;
+import javax.swing.JOptionPane;
+
+public class TablaTokensJSonHTML {
+ public static  int a=0;
+    public static void generateHTMLFromTokensListJS (LinkedList<TokensJson> tokensListJson) {
         String htmlContent = "<html>\n" +
                              "<head><title>Lista de Tokens</title></head>\n" +
                              "<body>\n" +
@@ -20,7 +22,7 @@ public class HTMLGenerator {
                              "<th align=\"center\">LINEA</th>\n" +
                              "<th align=\"center\">COLUMNA</th></tr>";
 
-        for (TokensStat token : tokensList) {
+        for (TokensJson token : tokensListJson) {
             htmlContent += "<tr >\n" +
                            "<td align=\"center\">" + token.getLEX() + "</td>\n" +
                            "<td align=\"center\">" + token.getToken() + "</td>\n" +
@@ -34,18 +36,26 @@ public class HTMLGenerator {
                        "</body>\n" +
                        "</html>";
         
-        System.out.println(htmlContent);
-
-        // Escribir el contenido HTML en un archivo
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath));
-            writer.write(htmlContent);
-            writer.close();
-            System.out.println("Archivo HTML generado exitosamente en " + outputPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        //System.out.println(htmlContent);
+        String archivoname = "Reportes\\TabladeTokensJSon"+a+".html";        
+        a++;
+               
+        
+        
+        
+    
+     try {
+      FileWriter myWriter = new FileWriter(archivoname);
+      myWriter.write(htmlContent);
+      myWriter.close();
+      JOptionPane.showMessageDialog(null,"se creo el reporte de stat");
+    } 
+    catch (IOException e) {
+      JOptionPane.showMessageDialog(null,"Ocurrio un error.");
+      e.printStackTrace();
     }
+     
+     htmlContent="";
+     
+  }
 }
-
-

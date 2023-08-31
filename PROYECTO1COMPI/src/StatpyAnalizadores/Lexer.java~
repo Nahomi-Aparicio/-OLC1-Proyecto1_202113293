@@ -832,128 +832,152 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 56: break;
           case 3:
-            { return new Symbol(sym.NOT, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"NOT",yyline,yycolumn));
+            return new Symbol(sym.NOT, yycolumn, yyline, yytext());
             }
           // fall through
           case 57: break;
           case 4:
-            { return new Symbol(sym.DOLAR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DOLAR",yyline,yycolumn));
+            return new Symbol(sym.DOLAR, yycolumn, yyline, yytext());
             }
           // fall through
           case 58: break;
           case 5:
-            { return new Symbol(sym.CHARI, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CHARI",yyline,yycolumn));
+            return new Symbol(sym.CHARI, yycolumn, yyline, yytext());
             }
           // fall through
           case 59: break;
           case 6:
-            { funciones.info.ListaTokensStat.add(new funciones.TokensStat("(","PARENTESIS_A",yyline,yycolumn));
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"PARENTESIS_A",yyline,yycolumn));
             return new Symbol(sym.PARENTESIS_A, yycolumn, yyline, yytext());
             }
           // fall through
           case 60: break;
           case 7:
-            { return new Symbol(sym.PARENTESIS_C, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat( yytext(),"PARENTESIS_C",yyline,yycolumn));
+             return new Symbol(sym.PARENTESIS_C, yycolumn, yyline, yytext());
             }
           // fall through
           case 61: break;
           case 8:
-            { return new Symbol(sym.POR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"POR",yyline,yycolumn));
+            return new Symbol(sym.POR, yycolumn, yyline, yytext());
             }
           // fall through
           case 62: break;
           case 9:
-            { return new Symbol(sym.MAS, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"MAS",yyline,yycolumn));
+            return new Symbol(sym.MAS, yycolumn, yyline, yytext());
             }
           // fall through
           case 63: break;
           case 10:
-            { return new Symbol(sym.COMA, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"COMA",yyline,yycolumn));
+            return new Symbol(sym.COMA, yycolumn, yyline, yytext());
             }
           // fall through
           case 64: break;
           case 11:
-            { return new Symbol(sym.MENOS, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"MENOS",yyline,yycolumn));
+            return new Symbol(sym.MENOS, yycolumn, yyline, yytext());
             }
           // fall through
           case 65: break;
           case 12:
-            { return new Symbol(sym.DIV, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DIV",yyline,yycolumn));
+            return new Symbol(sym.DIV, yycolumn, yyline, yytext());
             }
           // fall through
           case 66: break;
           case 13:
-            { return new Symbol(sym.ENTERO, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"ENTERO",yyline,yycolumn));
+                return new Symbol(sym.ENTERO, yycolumn, yyline, yytext());
             }
           // fall through
           case 67: break;
           case 14:
-            { return new Symbol(sym.DOSP, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DOSP",yyline,yycolumn));
+            return new Symbol(sym.DOSP, yycolumn, yyline, yytext());
             }
           // fall through
           case 68: break;
           case 15:
-            { return new Symbol(sym.PUNTO_COMA, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"PUNTO_COMA",yyline,yycolumn));
+            return new Symbol(sym.PUNTO_COMA, yycolumn, yyline, yytext());
             }
           // fall through
           case 69: break;
           case 16:
-            { return new Symbol(sym.MENOR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"MENOR",yyline,yycolumn));
+            return new Symbol(sym.MENOR, yycolumn, yyline, yytext());
             }
           // fall through
           case 70: break;
           case 17:
-            { return new Symbol(sym.IGUAL, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"IGUAL",yyline,yycolumn));
+            return new Symbol(sym.IGUAL, yycolumn, yyline, yytext());
             }
           // fall through
           case 71: break;
           case 18:
-            { return new Symbol(sym.MAYOR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"MAYOR",yyline,yycolumn));
+            return new Symbol(sym.MAYOR, yycolumn, yyline, yytext());
             }
           // fall through
           case 72: break;
           case 19:
-            { return new Symbol(sym.ID, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"ID",yyline,yycolumn));
+             return new Symbol(sym.ID, yycolumn, yyline, yytext());
             }
           // fall through
           case 73: break;
           case 20:
-            { return new Symbol(sym.CORCHETE_A, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CORCHETE_A",yyline,yycolumn));
+            return new Symbol(sym.CORCHETE_A, yycolumn, yyline, yytext());
             }
           // fall through
           case 74: break;
           case 21:
-            { return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CORCHETE_C",yyline,yycolumn));
+            return new Symbol(sym.CORCHETE_C, yycolumn, yyline, yytext());
             }
           // fall through
           case 75: break;
           case 22:
-            { return new Symbol(sym.LLAVE_A, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"LLAVE_A",yyline,yycolumn));
+            return new Symbol(sym.LLAVE_A, yycolumn, yyline, yytext());
             }
           // fall through
           case 76: break;
           case 23:
-            { return new Symbol(sym.LLAVE_C, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"LLAVE_C",yyline,yycolumn));
+            return new Symbol(sym.LLAVE_C, yycolumn, yyline, yytext());
             }
           // fall through
           case 77: break;
           case 24:
-            { return new Symbol(sym.DIFERENTE, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DIFERENTE",yyline,yycolumn));
+            return new Symbol(sym.DIFERENTE, yycolumn, yyline, yytext());
             }
           // fall through
           case 78: break;
           case 25:
-            { return new Symbol(sym.AND, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"AND",yyline,yycolumn));
+            return new Symbol(sym.AND, yycolumn, yyline, yytext());
             }
           // fall through
           case 79: break;
           case 26:
-            { return new Symbol(sym.MASMAS, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"MASMAS",yyline,yycolumn));
+            return new Symbol(sym.MASMAS, yycolumn, yyline, yytext());
             }
           // fall through
           case 80: break;
           case 27:
-            { return new Symbol(sym.MENOSMENOS, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"MENOSMENOS",yyline,yycolumn));
+            return new Symbol(sym.MENOSMENOS, yycolumn, yyline, yytext());
             }
           // fall through
           case 81: break;
@@ -963,132 +987,158 @@ public class Lexer implements java_cup.runtime.Scanner {
           // fall through
           case 82: break;
           case 29:
-            { return new Symbol(sym.ENOR_IGUAL, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"ENOR_IGUAL",yyline,yycolumn));
+            return new Symbol(sym.ENOR_IGUAL, yycolumn, yyline, yytext());
             }
           // fall through
           case 83: break;
           case 30:
-            { return new Symbol(sym.IGUALIGUAL, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"IGUALIGUAL",yyline,yycolumn));
+            return new Symbol(sym.IGUALIGUAL, yycolumn, yyline, yytext());
             }
           // fall through
           case 84: break;
           case 31:
-            { return new Symbol(sym.M_IGUAL, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"M_IGUAL",yyline,yycolumn));
+            return new Symbol(sym.M_IGUAL, yycolumn, yyline, yytext());
             }
           // fall through
           case 85: break;
           case 32:
-            { return new Symbol(sym.DO, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DO",yyline,yycolumn));
+            return new Symbol(sym.DO, yycolumn, yyline, yytext());
             }
           // fall through
           case 86: break;
           case 33:
-            { return new Symbol(sym.IF, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"IF",yyline,yycolumn));
+            return new Symbol(sym.IF, yycolumn, yyline, yytext());
             }
           // fall through
           case 87: break;
           case 34:
-            { return new Symbol(sym.OR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"OR",yyline,yycolumn));
+            return new Symbol(sym.OR, yycolumn, yyline, yytext());
             }
           // fall through
           case 88: break;
           case 35:
-            { return new Symbol(sym.CADENA, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CADENA",yyline,yycolumn));
+            return new Symbol(sym.CADENA, yycolumn, yyline, yytext());
             }
           // fall through
           case 89: break;
           case 36:
-            { return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DECIMAL",yyline,yycolumn));
+                return new Symbol(sym.DECIMAL, yycolumn, yyline, yytext());
             }
           // fall through
           case 90: break;
           case 37:
-            { return new Symbol(sym.FOR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"FOR",yyline,yycolumn));
+            return new Symbol(sym.FOR, yycolumn, yyline, yytext());
             }
           // fall through
           case 91: break;
           case 38:
-            { return new Symbol(sym.INT, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"INT",yyline,yycolumn));
+            return new Symbol(sym.INT, yycolumn, yyline, yytext());
             }
           // fall through
           case 92: break;
           case 39:
-            { return new Symbol(sym.VAR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"VAR",yyline,yycolumn));
+            return new Symbol(sym.VAR, yycolumn, yyline, yytext());
             }
           // fall through
           case 93: break;
           case 40:
-            { return new Symbol(sym.BOOL, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"BOOL",yyline,yycolumn));
+            return new Symbol(sym.BOOL, yycolumn, yyline, yytext());
             }
           // fall through
           case 94: break;
           case 41:
-            { return new Symbol(sym.CASE, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CASE",yyline,yycolumn));
+            return new Symbol(sym.CASE, yycolumn, yyline, yytext());
             }
           // fall through
           case 95: break;
           case 42:
-            { return new Symbol(sym.CHAR, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CHAR",yyline,yycolumn));
+            return new Symbol(sym.CHAR, yycolumn, yyline, yytext());
             }
           // fall through
           case 96: break;
           case 43:
-            { return new Symbol(sym.ELSE, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"ELSE",yyline,yycolumn));
+            return new Symbol(sym.ELSE, yycolumn, yyline, yytext());
             }
           // fall through
           case 97: break;
           case 44:
-            { return new Symbol(sym.MAIN, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"MAIN",yyline,yycolumn));
+            return new Symbol(sym.MAIN, yycolumn, yyline, yytext());
             }
           // fall through
           case 98: break;
           case 45:
-            { return new Symbol(sym.TRUE, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"TRUE",yyline,yycolumn));
+            return new Symbol(sym.TRUE, yycolumn, yyline, yytext());
             }
           // fall through
           case 99: break;
           case 46:
-            { return new Symbol(sym.VOID, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"VOID",yyline,yycolumn));
+            return new Symbol(sym.VOID, yycolumn, yyline, yytext());
             }
           // fall through
           case 100: break;
           case 47:
-            { return new Symbol(sym.BREAK, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"BREAK",yyline,yycolumn));
+            return new Symbol(sym.BREAK, yycolumn, yyline, yytext());
             }
           // fall through
           case 101: break;
           case 48:
-            { return new Symbol(sym.FALSE, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"FALSE",yyline,yycolumn));
+            return new Symbol(sym.FALSE, yycolumn, yyline, yytext());
             }
           // fall through
           case 102: break;
           case 49:
-            { return new Symbol(sym.WHILE, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"WHILE",yyline,yycolumn));
+            return new Symbol(sym.WHILE, yycolumn, yyline, yytext());
             }
           // fall through
           case 103: break;
           case 50:
-            { return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DOUBLE",yyline,yycolumn));
+            return new Symbol(sym.DOUBLE, yycolumn, yyline, yytext());
             }
           // fall through
           case 104: break;
           case 51:
-            { return new Symbol(sym.STRING, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"STRING",yyline,yycolumn));
+            return new Symbol(sym.STRING, yycolumn, yyline, yytext());
             }
           // fall through
           case 105: break;
           case 52:
-            { return new Symbol(sym.SWITCH, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"SWITCH",yyline,yycolumn));
+            return new Symbol(sym.SWITCH, yycolumn, yyline, yytext());
             }
           // fall through
           case 106: break;
           case 53:
-            { return new Symbol(sym.DEFAULT, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"DEFAULT",yyline,yycolumn));
+            return new Symbol(sym.DEFAULT, yycolumn, yyline, yytext());
             }
           // fall through
           case 107: break;
           case 54:
-            { return new Symbol(sym.CONSOL, yycolumn, yyline, yytext());
+            { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CONSOL",yyline,yycolumn));
+            return new Symbol(sym.CONSOL, yycolumn, yyline, yytext());
             }
           // fall through
           case 108: break;

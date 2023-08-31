@@ -5,6 +5,7 @@
 package proyecto1compi;
 
 import funciones.TokensStat;
+import funciones.TokensJson;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -224,9 +225,14 @@ public static boolean EsStay =false;
         //LISTA PARA LA GENERACION DE TOKENS
         LinkedList<TokensStat> tokensList = funciones.info.ListaTokensStat;
         
-         String outputPath = "output.html";
         // Generar el HTML utilizando la clase HTMLGenerator
-        funciones.HTMLGenerator.generateHTMLFromTokensList(tokensList, outputPath);
+        funciones.TablaTokensStatpyHTML.generateHTMLFromTokensList(tokensList);
+         tokensList.clear();
+         
+        LinkedList<TokensJson> tokensListJson = funciones.info.listaTokensJSon;
+        funciones.TablaTokensJSonHTML.generateHTMLFromTokensListJS(tokensListJson);
+         tokensListJson.clear();
+         
          
 
 
@@ -375,6 +381,12 @@ public static boolean EsStay =false;
           String Texto_enlaentrada = Entrada.getText();
           analizarJson(Texto_enlaentrada);
           
+          
+          
+        funciones.info.listaTokensJSon.forEach((elemento)->{      
+        System.out.println(elemento);
+          });
+        
     }else if (seleccionAnalisis=="Analizador StatPy"){
         System.out.println("Aqui va lo statpy");
         
@@ -392,11 +404,11 @@ public static boolean EsStay =false;
         
        
         //MUESTRO LOS TOKENS ASI TRANKI 
-        funciones.info.ListaTokensStat.forEach((elemento)->{      
+        /*funciones.info.ListaTokensStat.forEach((elemento)->{      
         System.out.println(elemento);
        
            });
-         
+         */
     }
         
     //funciones.funcion.mostrar("holi");      
