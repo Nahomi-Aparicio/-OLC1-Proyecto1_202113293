@@ -191,6 +191,35 @@ CHARI=\'
             return new Symbol(sym.NUEVOVALOR, yycolumn, yyline, yytext()); }
 
 
+"GraficaBarras"  { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"BARRAS",yyline,yycolumn));
+            return new Symbol(sym.BARRAS, yycolumn, yyline, yytext()); }
+
+
+"GraficaPie"    { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"PIE",yyline,yycolumn));
+            return new Symbol(sym.PIE, yycolumn, yyline, yytext()); }
+
+
+"Titulo"         { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"TITULO",yyline,yycolumn));
+            return new Symbol(sym.TITULO, yycolumn, yyline, yytext()); }
+
+
+"EjeX"             { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"EJEX",yyline,yycolumn));
+            return new Symbol(sym.EJEX, yycolumn, yyline, yytext()); }
+
+"TituloX"   { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"TITULOX",yyline,yycolumn));
+            return new Symbol(sym.TITULOX, yycolumn, yyline, yytext()); }
+
+"TituloY"   { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"TITULOY",yyline,yycolumn));
+            return new Symbol(sym.TITULOY, yycolumn, yyline, yytext()); }
+
+
+
+"Valores"   {funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"VALORES",yyline,yycolumn));
+            return new Symbol(sym.VALORES, yycolumn, yyline, yytext()); }
+
+
+
+
 //----> palabras reservadas para graficas falta preguntarle al aux
 
 

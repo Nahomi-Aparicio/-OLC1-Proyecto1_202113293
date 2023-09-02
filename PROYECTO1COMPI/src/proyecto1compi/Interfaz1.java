@@ -27,6 +27,8 @@ public class Interfaz1 extends javax.swing.JFrame {
 private File ArchivoAbierto;
 public File guardarcomo;
 
+
+
 public static boolean EsJSon =false;
 public static boolean EsStay =false;
     /**
@@ -400,25 +402,14 @@ public static boolean EsStay =false;
               }
         
            
-           String claveNivelInterno="\"variable1\"";
-           if ( funciones.maps.Archivos_Json.containsKey("sxdsxs.json")) {
-                if (funciones.maps.variables_Json.containsKey(claveNivelInterno)) {
-                    Object  valor =funciones.maps.variables_Json.get(claveNivelInterno);
-                    System.out.println("Valor encontrado: " + valor);
-                } else {
-                    System.out.println("La clave '" + claveNivelInterno + "' no se encontró en el nivel interno.");
-                }
-            } else {
-                System.out.println("La clave '" + "sxdsxs.json" + "' no se encontró en el nivel externo.");
-            }
-           
+          
            
        
     }else if (seleccionAnalisis=="Analizador StatPy"){
         System.out.println("Aqui va lo statpy");
         
         //--------------------------ANALIZADOR CUP Y FLEX         
-      //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
+     //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
         
         //OBTENGO EL TXTO DE LA ENTRADA 
           String Texto_enlaentrada = Entrada.getText();   
@@ -430,8 +421,14 @@ public static boolean EsStay =false;
           Salida.setText(listaSinCorchetes);
         
        
+          
+         /* for (String i : funciones.maps.Globales_tabla.keySet()) {
+                System.out.println("key: " + i + " value: " + funciones.maps.Globales_tabla.get(i));
+              }
+*/
+          
         //MUESTRO LOS TOKENS ASI TRANKI 
-        /*funciones.info.ListaTokensStat.forEach((elemento)->{      
+        /*funciones.info.Globales_tabla.forEach((elemento)->{      
         System.out.println(elemento);
        
            });

@@ -17,18 +17,24 @@ public class sym {
   public static final int CASE = 44;
   public static final int DIFERENTE = 23;
   public static final int DOUBLE = 29;
+  public static final int PIE = 56;
   public static final int CORCHETE_C = 11;
   public static final int INT = 28;
   public static final int CORCHETE_A = 10;
   public static final int LLAVE_C = 6;
   public static final int FOR = 40;
   public static final int LLAVE_A = 5;
+  public static final int TITULOY = 57;
+  public static final int TITULOX = 58;
   public static final int ENOR_IGUAL = 21;
   public static final int NOT = 26;
   public static final int AND = 24;
+  public static final int EJEX = 59;
   public static final int IGUAL = 13;
+  public static final int BARRAS = 55;
   public static final int OR = 25;
   public static final int BOOL = 31;
+  public static final int TITULO = 60;
   public static final int DIV = 17;
   public static final int MAIN = 33;
   public static final int IF = 34;
@@ -37,6 +43,7 @@ public class sym {
   public static final int NUEVOVALOR = 54;
   public static final int DECIMAL = 47;
   public static final int EOF = 0;
+  public static final int VALORES = 61;
   public static final int TRUE = 48;
   public static final int error = 1;
   public static final int M_IGUAL = 20;
@@ -118,7 +125,14 @@ public class sym {
   "GLOBALES",
   "ID",
   "CADENA",
-  "NUEVOVALOR"
+  "NUEVOVALOR",
+  "BARRAS",
+  "PIE",
+  "TITULOY",
+  "TITULOX",
+  "EJEX",
+  "TITULO",
+  "VALORES"
   };
 }
 

@@ -45,12 +45,14 @@ start with inicio;
 
 inicio ::= LLAVE_AA CUERPO LLAVE_CC ;
 
-CUERPO::= STRING:a DOSP VALORES:b               {:funciones.maps.variables_Json.put(a.toString(), b);:}
-       |STRING:a DOSP VALORES:b COMA CUERPO     {:funciones.maps.variables_Json.put(a.toString(), b);:}
+CUERPO::= STRING:a DOSP VALORES:b               {:String w = a.replace("\"", ""); funciones.maps.variables_Json.put(w.toString(), b);:}
+       |STRING:a DOSP VALORES:b COMA CUERPO     {:String w = a.replace("\"", "");funciones.maps.variables_Json.put(w.toString(), b);:}
 
 ;   
 
-VALORES ::= STRING:a    {:RESULT=a;:}
+VALORES ::= STRING:a     
+{:String w = a.replace("\"", ""); 
+  RESULT = w; :}
         |DOUBLE:a         {: RESULT=a;:}
 
 ;
