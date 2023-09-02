@@ -32,15 +32,16 @@ public class sym {
   public static final int DIV = 17;
   public static final int MAIN = 33;
   public static final int IF = 34;
-  public static final int ID = 51;
+  public static final int ID = 52;
   public static final int PUNTO_COMA = 7;
+  public static final int NUEVOVALOR = 54;
   public static final int DECIMAL = 47;
   public static final int EOF = 0;
   public static final int TRUE = 48;
   public static final int error = 1;
   public static final int M_IGUAL = 20;
   public static final int COMA = 9;
-  public static final int CADENA = 52;
+  public static final int CADENA = 53;
   public static final int MENOS = 15;
   public static final int MENOR = 19;
   public static final int BREAK = 39;
@@ -58,6 +59,7 @@ public class sym {
   public static final int STRING = 32;
   public static final int FALSE = 49;
   public static final int DOLAR = 12;
+  public static final int GLOBALES = 51;
   public static final int VAR = 46;
   public static final int DO = 45;
   public static final int MAS = 14;
@@ -113,8 +115,10 @@ public class sym {
   "TRUE",
   "FALSE",
   "CHARI",
+  "GLOBALES",
   "ID",
-  "CADENA"
+  "CADENA",
+  "NUEVOVALOR"
   };
 }
 

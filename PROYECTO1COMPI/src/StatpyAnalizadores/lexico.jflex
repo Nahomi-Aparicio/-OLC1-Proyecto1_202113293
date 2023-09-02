@@ -30,6 +30,8 @@ COMENT_S = "//" .*
 COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 CHARI=\'
 
+
+
 %%
 // ------------  Reglas Lexicas -------------------
 
@@ -182,6 +184,13 @@ CHARI=\'
 "break"     {funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"BREAK",yyline,yycolumn));
             return new Symbol(sym.BREAK, yycolumn, yyline, yytext());}
 
+"definirglobales"     { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"GLOBALES",yyline,yycolumn));
+            return new Symbol(sym.GLOBALES, yycolumn, yyline, yytext()); }
+
+"NewValor"         { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"NUEVOVALOR",yyline,yycolumn));
+            return new Symbol(sym.NUEVOVALOR, yycolumn, yyline, yytext()); }
+
+
 //----> palabras reservadas para graficas falta preguntarle al aux
 
 
@@ -200,6 +209,7 @@ CHARI=\'
 
 {CHARI}      { funciones.info.ListaTokensStat.add(new funciones.TokensStat(yytext(),"CHARI",yyline,yycolumn));
             return new Symbol(sym.CHARI, yycolumn, yyline, yytext()); }
+
 
 
 

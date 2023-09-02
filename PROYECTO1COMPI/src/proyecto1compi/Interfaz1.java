@@ -233,6 +233,8 @@ public static boolean EsStay =false;
         funciones.TablaTokensJSonHTML.generateHTMLFromTokensListJS(tokensListJson);
          tokensListJson.clear();
          
+       
+         
          
 
 
@@ -381,17 +383,42 @@ public static boolean EsStay =false;
           String Texto_enlaentrada = Entrada.getText();
           analizarJson(Texto_enlaentrada);
           
-          
-          
-        funciones.info.listaTokensJSon.forEach((elemento)->{      
+        /*funciones.info.listaTokensJSon.forEach((elemento)->{      
         System.out.println(elemento);
-          });
+          });*/
         
+        //funciones para guardar el nombre de el archivo en el HAsmap y luego guardar los datos del json en el 
+         String nombreArchivo = ArchivoAbierto.getName();         
+        funciones.maps.Archivos_Json.put(nombreArchivo, funciones.maps.variables_Json);
+                
+          for (String i : funciones.maps.variables_Json.keySet()) {
+                System.out.println("key: " + i + " value: " + funciones.maps.variables_Json.get(i));
+              }
+
+           for (String i : funciones.maps.Archivos_Json.keySet()) {
+                System.out.println("key: " + i + " value: " + funciones.maps.Archivos_Json.get(i));
+              }
+        
+           
+           String claveNivelInterno="\"variable1\"";
+           if ( funciones.maps.Archivos_Json.containsKey("sxdsxs.json")) {
+                if (funciones.maps.variables_Json.containsKey(claveNivelInterno)) {
+                    Object  valor =funciones.maps.variables_Json.get(claveNivelInterno);
+                    System.out.println("Valor encontrado: " + valor);
+                } else {
+                    System.out.println("La clave '" + claveNivelInterno + "' no se encontró en el nivel interno.");
+                }
+            } else {
+                System.out.println("La clave '" + "sxdsxs.json" + "' no se encontró en el nivel externo.");
+            }
+           
+           
+       
     }else if (seleccionAnalisis=="Analizador StatPy"){
         System.out.println("Aqui va lo statpy");
         
         //--------------------------ANALIZADOR CUP Y FLEX         
-        //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
+      //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
         
         //OBTENGO EL TXTO DE LA ENTRADA 
           String Texto_enlaentrada = Entrada.getText();   

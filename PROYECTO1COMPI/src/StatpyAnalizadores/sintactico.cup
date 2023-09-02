@@ -46,8 +46,8 @@ action code
 terminal String ENTERO,PARENTESIS_A,PARENTESIS_C,LLAVE_A,LLAVE_C,PUNTO_COMA,DOSP,COMA,CORCHETE_A,
 CORCHETE_C,DOLAR,IGUAL,MAS,MENOS,POR,DIV,MAYOR,MENOR,M_IGUAL,ENOR_IGUAL,
 IGUALIGUAL,DIFERENTE,AND,OR,NOT,VOID,INT,DOUBLE,CHAR,BOOL,STRING,MAIN,IF,MASMAS,MENOSMENOS,
-ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO,VAR,DECIMAL,TRUE,FALSE,CHARI,
-ID,CADENA;
+ELSE,SWITCH,BREAK,FOR,WHILE,CONSOL,DEFAULT,CASE,DO,VAR,DECIMAL,TRUE,FALSE,CHARI,GLOBALES,
+ID,CADENA,NUEVOVALOR;
 
 
 //------> Declaración de no terminales
@@ -57,6 +57,9 @@ datoint,vari,unswitch,uncaso,otrocaso,casodefalut,unbreak,undo,unaexpmas,
 ifif,unif,unelse,elsee,imprimir,elstring,operadores,relacion,logico,unwhile,unacadena,
 unfor,datofor,unosfor,relacionFor,unaexpmasfor;
 
+
+//---------TERMINALES PARA LAS GRAFICAS
+non terminal globo,unglobo,otroglobo,datoglo,respuestaglo,dentrollaveglo;
 
 
 //------> PRECEDENCIA
@@ -89,6 +92,7 @@ instruccion::= declaracionVar:a      {:RESULT=a;:}
             |undo:a                  {:RESULT=a;:}
             |unaexpmas:a             {:RESULT=a;:}
             |unfor:a                 {:RESULT=a;:}
+            |globo                   {:RESULT="";:}
             
 ;
 
@@ -100,7 +104,7 @@ declaracionVar::=datoint:a          {:RESULT=a;:}
 
 datoint::= vari ID:a IGUAL Expresion:b  PUNTO_COMA   {:RESULT=" "+a+"="+b;:}          
         |vari ID:a PUNTO_COMA                        {:RESULT=" "+a;:} 
-        |ID IGUAL Expresion:a PUNTO_COMA                  {:RESULT=" ="+a;:} 
+        |ID:b IGUAL Expresion:a PUNTO_COMA                  {:RESULT=b+" ="+a;:} 
 ;
 
 vari::=INT:a                         {:RESULT=a;:}  
@@ -193,8 +197,8 @@ unwhile::=WHILE PARENTESIS_A operadores:a PARENTESIS_C LLAVE_A lista_Inst:b LLAV
         ;
 
 //-----------------------------SWITCH----------------------------------> 
-unswitch::=SWITCH PARENTESIS_A PARENTESIS_C LLAVE_A uncaso:a LLAVE_C    
-{:RESULT="def switch("+"):\n switcher = {\n"+a+"\n}";:} 
+unswitch::=SWITCH PARENTESIS_A Expresion:c PARENTESIS_C LLAVE_A uncaso:a LLAVE_C    
+{:RESULT="def switch("+c+"):\n switcher = {\n"+a+"\n}";:} 
     ;
 
 
@@ -203,8 +207,9 @@ uncaso::=uncaso:a otrocaso:b            {:RESULT=a+""+indent(b.toString(), 1);:}
     ;
 
 
-otrocaso::= CASE ENTERO:a DOSP lista_Inst:b                       {:RESULT=a+": "+b+",\n";:} 
-        |CASE ENTERO:a DOSP lista_Inst:b    unbreak               {:RESULT=a+": "+b+",\n";:}  
+
+otrocaso::= CASE Expresion:a DOSP lista_Inst:b                       {:RESULT=a+": "+b+",\n";:} 
+        |CASE Expresion:a DOSP lista_Inst:b    unbreak               {:RESULT=a+": "+b+",\n";:}  
         |casodefalut:a                                            {:RESULT=a;:}      
     ;
 
@@ -217,7 +222,7 @@ unbreak::=BREAK PUNTO_COMA
 
 //-----------------------------DO---------------------------------->
 
-undo::= DO LLAVE_A lista_Inst:a  LLAVE_C WHILE PARENTESIS_A operadores:b PARENTESIS_C PUNTO_COMA     
+undo::=  DO LLAVE_A lista_Inst:a  LLAVE_C WHILE PARENTESIS_A operadores:b PARENTESIS_C PUNTO_COMA     
            {:RESULT="while True:\n"+indent(a.toString(), 1)+"\n       if ("+b+"):\n       break";:} 
         ;
 
@@ -245,3 +250,35 @@ relacionFor::= ID MAYOR ENTERO:a  PUNTO_COMA     {:RESULT=a;:}
 unaexpmasfor::=ID:a MASMAS      {:RESULT=a;:}     
         |ID:a MENOSMENOS        {:RESULT=a;:}     
         ;
+
+
+//------------------------------------------------------------>
+//------------------------------------------------------------>
+
+//--------------------------COMIENZO DE LAS GRAFICAS ---------------------------------->
+
+//---------------------------DEFINICION DE GLOBALES--------------------------------->
+
+globo::=VOID GLOBALES  PARENTESIS_A  PARENTESIS_C LLAVE_A unglobo LLAVE_C   {:System.out.println("void globales");:}
+;
+
+unglobo::= unglobo otroglobo
+        |otroglobo
+;
+
+otroglobo::= STRING ID IGUAL CADENA PUNTO_COMA
+            |DOUBLE ID IGUAL DECIMAL PUNTO_COMA
+            |DOUBLE ID IGUAL respuestaglo PUNTO_COMA
+;
+
+
+
+datoglo::=STRING
+        |DOUBLE
+        ;
+ 
+respuestaglo::= DOLAR  LLAVE_A dentrollaveglo LLAVE_C 
+    ;
+
+dentrollaveglo::=NUEVOVALOR COMA CADENA COMA CADENA
+    ;

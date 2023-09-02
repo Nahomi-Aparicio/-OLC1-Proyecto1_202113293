@@ -48,10 +48,10 @@ public class TablaTokensJSonHTML {
       FileWriter myWriter = new FileWriter(archivoname);
       myWriter.write(htmlContent);
       myWriter.close();
-      JOptionPane.showMessageDialog(null,"se creo el reporte de stat");
+      JOptionPane.showMessageDialog(null,"se creo el reporte de tokens JSON");
     } 
     catch (IOException e) {
-      JOptionPane.showMessageDialog(null,"Ocurrio un error.");
+      JOptionPane.showMessageDialog(null,"Ocurrio un erroral generar reporte JSON");
       e.printStackTrace();
     }
      
