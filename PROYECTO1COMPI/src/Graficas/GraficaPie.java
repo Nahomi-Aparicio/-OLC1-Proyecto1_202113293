@@ -16,6 +16,7 @@ import org.jfree.data.general.DefaultPieDataset;
  */
 public class GraficaPie {
          public void Graficar(String titulo,ArrayList<String> ValuesX,ArrayList<Double> Values) throws IOException{
+           System.out.println("grafica de pie");
              DefaultPieDataset dataset = new DefaultPieDataset( );
                     for (int i = 0; i < ValuesX.size(); i++) {
                         dataset.setValue(ValuesX.get(i), Values.get(i) );
@@ -29,7 +30,7 @@ public class GraficaPie {
 
                   int width = 640;   /* Width of the image */
                   int height = 480;  /* Height of the image */ 
-                  File pieChart = new File( "PieChart.jpeg" ); 
+                  File pieChart = new File( "GRAFICA_PIE .jpeg" ); 
                   ChartUtilities.saveChartAsJPEG( pieChart , chart , width , height );
          }
 }

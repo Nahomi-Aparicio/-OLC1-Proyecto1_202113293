@@ -390,18 +390,16 @@ public static boolean EsStay =false;
           });*/
         
         //funciones para guardar el nombre de el archivo en el HAsmap y luego guardar los datos del json en el 
-         String nombreArchivo = ArchivoAbierto.getName();         
-        funciones.maps.Archivos_Json.put(nombreArchivo, funciones.maps.variables_Json);
-                
-          for (String i : funciones.maps.variables_Json.keySet()) {
-                System.out.println("key: " + i + " value: " + funciones.maps.variables_Json.get(i));
-              }
-
-           for (String i : funciones.maps.Archivos_Json.keySet()) {
-                System.out.println("key: " + i + " value: " + funciones.maps.Archivos_Json.get(i));
-              }
+         String nombreArchivo = ArchivoAbierto.getName();
+          System.out.println(nombreArchivo);
         
+       funciones.maps.mostrar();
+       funciones.maps.variable(nombreArchivo);
+
            
+    for (String i : funciones.maps.Archivos_Json.keySet()) {
+        System.out.println("key: " + i + " values: " + funciones.maps.Archivos_Json.get(i));
+    }
           
            
        
@@ -417,7 +415,6 @@ public static boolean EsStay =false;
           
         //LISTA DE LA TRADUCCION
           String listaSinCorchetes = String.join(", ", lista);         
-          System.out.println(listaSinCorchetes);
           Salida.setText(listaSinCorchetes);
         
        

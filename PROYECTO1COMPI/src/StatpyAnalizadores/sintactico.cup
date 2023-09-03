@@ -5,6 +5,7 @@ import java_cup.runtime.*;
 import Graficas.GraficarBarras;
 import Graficas.GraficaPie;
 import java.util.ArrayList;
+import java.util.Map;
 
 //------> Codigo para el parser
 //------> Declaracion de variables, funciones y funciones de error
@@ -39,24 +40,44 @@ parser code
     }
 
 
- public Object datos(String archivos, String variable) {
+public Object datos(String archivos, String variable) {
+    System.out.println(archivos);
+    System.out.println(variable);
+
     String archivo = archivos.replace("\"", "");
     String variables = variable.replace("\"", "");
     Object valor = null; // Inicializar valor como un Object
-    
+
+    // Verificar si el archivo externo existe en el mapa
     if (funciones.maps.Archivos_Json.containsKey(archivo)) {
-        if (funciones.maps.variables_Json.containsKey(variables)) {
-            valor = funciones.maps.variables_Json.get(variables);
-            System.out.println("Valor encontrado: " + valor);
+        // Obtener el objeto del archivo externo
+        Object archivoJson = funciones.maps.Archivos_Json.get(archivo);
+
+        // Verificar si el objeto es un mapa antes de acceder a sus claves
+        if (archivoJson instanceof Map) {
+            // Convertir el objeto a un mapa
+            Map<?, ?> mapaInterno = (Map<?, ?>) archivoJson;
+
+            // Verificar si la variable interna existe en el mapa
+            if (mapaInterno.containsKey(variables)) {
+                valor = mapaInterno.get(variables);
+                System.out.println("Valor encontrado en el archivo '" + archivo + "': " + valor);
+            } else {
+                System.out.println("La clave '" + variables + "' no se encontró en el nivel interno del archivo '" + archivo + "'.");
+            }
         } else {
-            System.out.println("La clave '" + variables + "' no se encontró en el nivel interno.");
+            System.out.println("El archivo '" + archivo + "' no contiene un mapa interno válido.");
         }
     } else {
         System.out.println("La clave '" + archivo + "' no se encontró en el nivel externo.");
     }
-    
+
     return valor;
 }
+
+
+
+
 
  public Object datosejex(String variable) {
     String variables = variable;
@@ -105,7 +126,7 @@ ID,CADENA,NUEVOVALOR,BARRAS,PIE,TITULOY,TITULOX,EJEX,TITULO,VALORES;
 non terminal inicio,lista_Inst,instruccion,declaracionVar,Expresion,
 datoint,vari,unswitch,uncaso,otrocaso,casodefalut,unbreak,undo,unaexpmas,
 ifif,unif,unelse,elsee,imprimir,elstring,operadores,relacion,logico,unwhile,unacadena,
-unfor,datofor,unosfor,relacionFor,unaexpmasfor;
+unfor,datofor,unosfor,relacionFor,unaexpmasfor,buscardato;
 
 
 //---------TERMINALES PARA LAS GRAFICAS
@@ -130,22 +151,22 @@ start with inicio;
 //FALTA LOS BREAK EN LOS IF  Y WHILE y el valor del switch  preguntar al aux de lo de el b++
 
 inicio ::=  VOID MAIN  PARENTESIS_A PARENTESIS_C LLAVE_A lista_Inst:a  LLAVE_C    
- {:funciones.Traduccion.TraduccionPy.add("def main (): \n" +a.toString() + "\n\n if__name__ = \"__main__\": \n main()" + "\n");:}   
+ {:funciones.Traduccion.TraduccionPy.add("def main (): \n" +a.toString() + "if__name__ = \"__main__\": \n main()" + "\n");:}   
         ;
 
-lista_Inst::= instruccion:a lista_Inst:b      {:RESULT = a +"\n"+ b ; :}  
+lista_Inst::= instruccion:a lista_Inst:b      {:RESULT = a +""+ b ; :}  
             |instruccion:a                        {:RESULT=a;:}
         ;
-instruccion::= declaracionVar:a      {:RESULT=a;:}           
-            |ifif:a                  {:RESULT=a;:}
-            |imprimir:a              {:RESULT=a;:}               
-            |unwhile:a               {:RESULT=a;:} 
-            |unswitch:a              {:RESULT=a;:}
-            |undo:a                  {:RESULT=a;:}
-            |unaexpmas:a             {:RESULT=a;:}
-            |unfor:a                 {:RESULT=a;:}
+instruccion::= declaracionVar:a      {:RESULT=a+"\n";:}           
+            |ifif:a                  {:RESULT=a+"\n";:}
+            |imprimir:a              {:RESULT=a+"\n";:}               
+            |unwhile:a               {:RESULT=a+"\n";:} 
+            |unswitch:a              {:RESULT=a+"\n";:}
+            |undo:a                  {:RESULT=a+"\n";:}
+            |unaexpmas:a             {:RESULT=a+"\n";:}
+            |unfor:a                 {:RESULT=a+"\n";:}
             |globo                   {:RESULT="";:}
-            |unabarra                {:RESULT="";:}   
+            |unabarra                 {:RESULT="";:} 
             
 ;
 
@@ -362,21 +383,26 @@ otrabarra::=lagrafa otrabarra
             ;
 
 
-lagrafa::=STRING TITULO IGUAL ID:a PUNTO_COMA                         {:String w = a.replace("\"", "");titulo=(String)w;:}                                       
+lagrafa::=STRING TITULO IGUAL buscardato:a PUNTO_COMA                         {:titulo=(String)a;:}
+                                       
         |STRING CORCHETE_A CORCHETE_C EJEX IGUAL LLAVE_A ejexdatos LLAVE_C  PUNTO_COMA
         |DOUBLE CORCHETE_A CORCHETE_C VALORES IGUAL LLAVE_A valores LLAVE_C  PUNTO_COMA
-        |STRING TITULOY  IGUAL CADENA:a PUNTO_COMA                  {:String w = a.replace("\"", "");titulox=(String)w; :}
-        |STRING TITULOX IGUAL CADENA:a PUNTO_COMA                     {:String w = a.replace("\"", ""); tituloy=(String)w;:}
+        |STRING TITULOY  IGUAL buscardato:a PUNTO_COMA                  {:titulox=(String)a; :}
+        |STRING TITULOX IGUAL buscardato:a PUNTO_COMA                     {:tituloy=(String)a;:}
         ;
 
 ejexdatos::= eldato ejexdatos
             |eldato
         ;
 
+buscardato::= ID:a      {: Object w=datosejex(a);RESULT=w;:}
+        |CADENA:a         {:String w = a.replace("\"", "");RESULT=w;:}
+;
+
 eldato::=CADENA:a    {:ValuesX.add((String)a); :}
         |COMA
         |ID:a          {: Object w=datosejex(a);ValuesX.add((String)w);:}
-        |DECIMAL    
+        |DECIMAL        
 ;
 
 valores::=otrovalor valores
@@ -388,6 +414,12 @@ otrovalor::=ID:a
                         {:
                             double w = 0.0;    
                             w = Double.parseDouble(datosejex(a).toString());                            
+                           Values.add((Double)w);
+                        :}
+            |DECIMAL:e
+{:
+                            double w = 0.0;    
+                            w = Double.parseDouble(e);                            
                            Values.add((Double)w);
                         :}
             |COMA                                   
