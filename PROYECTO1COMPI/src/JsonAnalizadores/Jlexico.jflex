@@ -63,4 +63,8 @@ COMENT_M = "/*"([^*]|("*"+[^*/]))*"*/"
 
 
 //------> Errores Léxicos 
-.           	{ System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn); }
+.           	{ System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn); 
+funciones.info.ListaErroresJSon.add(new funciones.ErrorJson(yytext(),"error lexico",yyline,yycolumn));
+
+   
+}

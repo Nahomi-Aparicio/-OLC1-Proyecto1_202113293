@@ -5,9 +5,8 @@
         <group>
             <file>file:/C:/Users/genes/Desktop/ProyectoOLC/PROYECTO1COMPI/src/proyecto1compi/Interfaz1.java</file>
             <file>file:/C:/Users/genes/Desktop/ProyectoOLC/PROYECTO1COMPI/src/StatpyAnalizadores/lexico.jflex</file>
+            <file>file:/C:/Users/genes/Desktop/ProyectoOLC/PROYECTO1COMPI/src/JsonAnalizadores/Lexer.java</file>
             <file>file:/C:/Users/genes/Desktop/ProyectoOLC/PROYECTO1COMPI/src/StatpyAnalizadores/sintactico.cup</file>
-            <file>file:/C:/Users/genes/Desktop/ProyectoOLC/PROYECTO1COMPI/src/StatpyAnalizadores/Lexer.java</file>
-            <file>file:/C:/Users/genes/Desktop/ProyectoOLC/PROYECTO1COMPI/src/StatpyAnalizadores/Parser.java</file>
         </group>
     </open-files>
 </project-private>

@@ -13,4 +13,7 @@ import java.util.LinkedList;
 public class info {
       public static LinkedList<TokensStat> ListaTokensStat = new LinkedList<TokensStat>();
       public static LinkedList<TokensJson> listaTokensJSon = new LinkedList<TokensJson>();
+      public static LinkedList<ErroresStat> ListaErroresStat = new LinkedList<ErroresStat>();
+      public static LinkedList<ErrorJson> ListaErroresJSon = new LinkedList<ErrorJson>();
 }
+

@@ -893,6 +893,7 @@ public class Lexer implements java_cup.runtime.Scanner {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
             { System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn);
+                    funciones.info.ListaErroresStat.add(new funciones.ErroresStat(yytext(),"error lexico",yyline,yycolumn));
             }
           // fall through
           case 64: break;

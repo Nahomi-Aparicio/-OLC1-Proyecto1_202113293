@@ -251,7 +251,7 @@ CHARI=\'
 
 //------> Errores Léxicos 
 .           	{ System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn);
-                   
+                    funciones.info.ListaErroresStat.add(new funciones.ErroresStat(yytext(),"error lexico",yyline,yycolumn));
 
  }
 

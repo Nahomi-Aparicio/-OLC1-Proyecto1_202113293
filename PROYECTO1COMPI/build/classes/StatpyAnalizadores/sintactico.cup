@@ -282,9 +282,10 @@ uncaso::=uncaso:a otrocaso:b            {:RESULT=a+""+indent(b.toString(), 1);:}
 
 
 
-otrocaso::= CASE Expresion:a DOSP lista_Inst:b                       {:RESULT=a+": "+b+",\n";:} 
-        |CASE Expresion:a DOSP lista_Inst:b    unbreak               {:RESULT=a+": "+b+",\n";:}  
+otrocaso::= CASE Expresion:a DOSP lista_Inst:b                       {:RESULT=a+": "+b+",";:} 
+        |CASE Expresion:a DOSP lista_Inst:b    unbreak               {:RESULT=a+": "+b+",";:}  
         |casodefalut:a                                            {:RESULT=a;:}      
+        |casodefalut:a unbreak                                      {:RESULT=a;:} 
     ;
 
 casodefalut::=DEFAULT DOSP lista_Inst:b                           {:RESULT="n:"+b+",";:}          

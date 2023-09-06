@@ -712,7 +712,8 @@ public class Lexer implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn);
+            { System.out.println("Error Lexico: " + yytext() + " | Fila:" + yyline + " | Columna: " + yycolumn); 
+funciones.info.ListaErroresJSon.add(new funciones.ErrorJson(yytext(),"error lexico",yyline,yycolumn));
             }
           // fall through
           case 10: break;

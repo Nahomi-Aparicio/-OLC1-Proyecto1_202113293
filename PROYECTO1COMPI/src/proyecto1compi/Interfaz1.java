@@ -4,6 +4,9 @@
  */
 package proyecto1compi;
 
+
+import funciones.ErrorJson;
+import funciones.ErroresStat;
 import funciones.TokensStat;
 import funciones.TokensJson;
 import java.io.File;
@@ -235,8 +238,14 @@ public static boolean EsStay =false;
         funciones.TablaTokensJSonHTML.generateHTMLFromTokensListJS(tokensListJson);
          tokensListJson.clear();
          
-       
+        LinkedList<ErroresStat> tokensListerrorstat = funciones.info.ListaErroresStat;
+        funciones.TablaErroresStat.generateHTMLFromTokenERRSTAT(tokensListerrorstat);
+         tokensListerrorstat.clear();
          
+       
+         LinkedList<ErrorJson> tokensListerrorJSON = funciones.info.ListaErroresJSon;
+        funciones.TablaErroresJson.generateHTMLFromTokenERRJSON(tokensListerrorJSON);
+         tokensListerrorJSON.clear();
          
 
 
@@ -417,7 +426,9 @@ public static boolean EsStay =false;
           String listaSinCorchetes = String.join(", ", lista);         
           Salida.setText(listaSinCorchetes);
         
-       
+       funciones.info.ListaErroresStat.forEach((elemento)->{      
+        System.out.println(elemento);
+          });
           
          /* for (String i : funciones.maps.Globales_tabla.keySet()) {
                 System.out.println("key: " + i + " value: " + funciones.maps.Globales_tabla.get(i));
@@ -432,9 +443,8 @@ public static boolean EsStay =false;
          */
     }
         
-    //funciones.funcion.mostrar("holi");      
-      //ESTO ES PARA LA TABLA DE TOKENS AUN FALTA PERO ESTA CASI EL COMO HACERLO 
-     /* ;*/
+   
+    
       
     }//GEN-LAST:event_EjecutarActionPerformed
 
