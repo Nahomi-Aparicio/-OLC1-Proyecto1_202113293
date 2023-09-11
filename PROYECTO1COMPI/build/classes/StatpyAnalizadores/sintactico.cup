@@ -80,8 +80,9 @@ public Object datos(String archivos, String variable) {
 
 
  public Object datosejex(String variable) {
+System.out.println("entra datosejex"+variable);
     String variables = variable;
-    Object valor = null; // Inicializar valor como un Object
+    Object valor = ""; // Inicializar valor como un Object
 
         if (funciones.maps.Globales_tabla.containsKey(variables)) {
             valor = funciones.maps.Globales_tabla.get(variables);
@@ -341,9 +342,10 @@ unglobo::= unglobo otroglobo
         |otroglobo
 ;
 
-otroglobo::= STRING ID:a IGUAL CADENA:b PUNTO_COMA       {: funciones.maps.Globales_tabla.put(a, b);:}
-            |DOUBLE ID:a IGUAL DECIMAL:b PUNTO_COMA        {: funciones.maps.Globales_tabla.put(a, b);:}
-            |DOUBLE ID:a IGUAL respuestaglo:b PUNTO_COMA    {: funciones.maps.Globales_tabla.put(a, b);:}
+otroglobo::= STRING ID:a IGUAL CADENA:b PUNTO_COMA       {: funciones.maps.Globales_tabla.put(a.toLowerCase(), b);:}
+            |DOUBLE ID:a IGUAL DECIMAL:b PUNTO_COMA        {: funciones.maps.Globales_tabla.put(a.toLowerCase(), b);:}
+            |DOUBLE ID:a IGUAL respuestaglo:b PUNTO_COMA    {: funciones.maps.Globales_tabla.put(a.toLowerCase(), b);:}
+            |STRING ID:a IGUAL respuestaglo:b PUNTO_COMA    {: funciones.maps.Globales_tabla.put(a.toLowerCase(), b);:}
 ;
 
 
@@ -396,14 +398,17 @@ ejexdatos::= eldato ejexdatos
             |eldato
         ;
 
-buscardato::= ID:a      {: Object w=datosejex(a);RESULT=w;:}
+buscardato::= ID:a      {: Object w=datosejex(a.toLowerCase());RESULT=w;:}
         |CADENA:a         {:String w = a.replace("\"", "");RESULT=w;:}
+        
 ;
 
 eldato::=CADENA:a    {:ValuesX.add((String)a); :}
         |COMA
         |ID:a          {: Object w=datosejex(a);ValuesX.add((String)w);:}
-        |DECIMAL        
+        |DECIMAL
+        |respuestaglo:a        {:ValuesX.add((String)a); :}
+
 ;
 
 valores::=otrovalor valores
@@ -414,7 +419,7 @@ otrovalor::=ID:a
 
                         {:
                             double w = 0.0;    
-                            w = Double.parseDouble(datosejex(a).toString());                            
+                            w = Double.parseDouble(datosejex(a.toLowerCase()).toString());                            
                            Values.add((Double)w);
                         :}
             |DECIMAL:e
