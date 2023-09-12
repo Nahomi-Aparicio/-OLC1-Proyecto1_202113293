@@ -388,8 +388,7 @@ otrabarra::=lagrafa otrabarra
             ;
 
 
-lagrafa::=STRING TITULO IGUAL buscardato:a PUNTO_COMA                         {:titulo=(String)a;:}
-                                       
+lagrafa::=STRING TITULO IGUAL buscardato:a PUNTO_COMA                         {:titulo=(String)a;:}                         
         |STRING CORCHETE_A CORCHETE_C EJEX IGUAL LLAVE_A ejexdatos LLAVE_C  PUNTO_COMA
         |DOUBLE CORCHETE_A CORCHETE_C VALORES IGUAL LLAVE_A valores LLAVE_C  PUNTO_COMA
         |STRING TITULOY  IGUAL buscardato:a PUNTO_COMA                  {:titulox=(String)a; :}
@@ -402,6 +401,7 @@ ejexdatos::= eldato ejexdatos
 
 buscardato::= ID:a      {: Object w=datosejex(a.toLowerCase());RESULT=w;:}
         |CADENA:a         {:String w = a.replace("\"", "");RESULT=w;:}
+        |respuestaglo:a        {:RESULT=a;:}
         
 ;
 

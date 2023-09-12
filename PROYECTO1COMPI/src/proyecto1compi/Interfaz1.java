@@ -421,7 +421,7 @@ public static boolean EsStay =false;
         //OBTENGO EL TXTO DE LA ENTRADA 
           String Texto_enlaentrada = Entrada.getText();   
           analizarStay(Texto_enlaentrada); 
-          
+         
         //LISTA DE LA TRADUCCION
           String listaSinCorchetes = String.join(", ", lista);         
           Salida.setText(listaSinCorchetes);
