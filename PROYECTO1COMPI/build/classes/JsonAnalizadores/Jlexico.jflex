@@ -15,8 +15,10 @@ import java_cup.runtime.*;
 %unicode
 %ignorecase
 
-%{ 
-%} 
+%init{ 
+    yyline = 1;
+    yycolumn =1;
+%init}  
 
 // ------> Expresiones Regulares 
 
