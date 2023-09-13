@@ -124,8 +124,8 @@ ID,CADENA,NUEVOVALOR,BARRAS,PIE,TITULOY,TITULOX,EJEX,TITULO,VALORES;
 
 //------> Declaración de no terminales
 
-non terminal inicio,lista_Inst,instruccion,declaracionVar,Expresion,
-datoint,vari,unswitch,uncaso,otrocaso,casodefalut,unbreak,undo,unaexpmas,
+non terminal inicio,lista_Inst,instruccion,declaracionVar,
+datoint,vari,unswitch,uncaso,otrocaso,casodefalut,undo,unaexpmas,
 ifif,unif,unelse,elsee,imprimir,elstring,operadores,relacion,logico,unwhile,unacadena,
 unfor,datofor,unosfor,relacionFor,unaexpmasfor,buscardato;
 
@@ -167,7 +167,8 @@ instruccion::= declaracionVar:a      {:RESULT=a+"\n";:}
             |unaexpmas:a             {:RESULT=a+"\n";:}
             |unfor:a                 {:RESULT=a+"\n";:}
             |globo                   {:RESULT="";:}
-            |unabarra                 {:RESULT="";:} 
+            |unabarra                 {:RESULT="";:}
+            |BREAK PUNTO_COMA          {:RESULT="break";:} 
             
 ;
 
@@ -177,9 +178,11 @@ declaracionVar::=datoint:a          {:RESULT=a;:}
             
         ;
 
-datoint::= vari ID:a IGUAL Expresion:b  PUNTO_COMA   {:RESULT=" "+a+"="+b;:}          
-        |vari ID:a PUNTO_COMA                        {:RESULT=" "+a;:} 
-        |ID:b IGUAL Expresion:a PUNTO_COMA                  {:RESULT=b+" ="+a;:} 
+datoint::= vari ID:a IGUAL operadores:b  PUNTO_COMA   {:RESULT=" "+a+"="+b;:}          
+        |vari ID:a PUNTO_COMA                        {:RESULT=" "+a+"=NONE";:} 
+        |ID:b IGUAL operadores:a PUNTO_COMA                  {:RESULT=b+" ="+a;:}
+        
+        
 ;
 
 vari::=INT:a                         {:RESULT=a;:}  
@@ -195,26 +198,11 @@ unaexpmas::=ID:a MASMAS PUNTO_COMA              {:RESULT=a+"++";:}
         |ID:a MENOSMENOS PUNTO_COMA             {:RESULT=a+"--";:}
         ;
 
-Expresion::=Expresion:a MENOS Expresion:b       {: RESULT = a + " - " + b; :}        
-        |MENOS ENTERO:a                         {:RESULT="-"+a;:}
-        |Expresion:a POR Expresion:b            {: RESULT = a + " *" + b; :}
-        |Expresion:a DIV Expresion:b            {: RESULT = a + " / " + b; :}
-        |Expresion:a MAS Expresion:b            {: RESULT = a + " + " + b; :}
-        |ENTERO:a                               {:RESULT=a;:}
-        |CADENA:a                               {:RESULT=a;:}
-        |DECIMAL:a                              {:RESULT=a;:}
-        |ID:a                                   {:RESULT=a;:}
-        |TRUE:a                                 {:RESULT=a;:}
-        |FALSE:a                                {:RESULT=a;:}
-        |CHARI ID:a CHARI                         {:RESULT="'"+a+"'";:}
-        
-        
-        
-    ;
+
 
 
 //--------------------------IMPRIMIR -------------------------------------> 
-imprimir::=CONSOL PARENTESIS_A  elstring:a PARENTESIS_C PUNTO_COMA     {:RESULT="print("+a+")";:} 
+imprimir::=CONSOL PARENTESIS_A  operadores:a PARENTESIS_C PUNTO_COMA     {:RESULT="print("+a+")";:} 
 
 ;         
 
@@ -225,6 +213,7 @@ elstring::=elstring:a unacadena:b           {:RESULT=a+""+b;:}
 unacadena::= unacadena:a MAS unacadena:b        {:RESULT=a+" , "+b;:}    
         |ID:a                                   {:RESULT=a;:}
         |CADENA:a                               {:RESULT=a;:}
+
     ;
 
 //--------------------------Sentencias IF-------------------------------------> 
@@ -256,11 +245,18 @@ relacion::= relacion:a MAYOR relacion:b     {: RESULT = a + ">" + b; :}
         |relacion:a ENOR_IGUAL relacion:b   {: RESULT = a + "<=" + b; :}
         |relacion:a IGUALIGUAL relacion:b   {: RESULT = a + "==" + b; :}
         |relacion:a DIFERENTE relacion:b    {: RESULT = a + "!=" + b; :}
+        |relacion:a MENOS relacion:b         {: RESULT = a + " - " + b; :}
+        |relacion:a POR relacion:b            {: RESULT = a + " *" + b; :}
+        |relacion:a DIV relacion:b            {: RESULT = a + " / " + b; :}
+        |relacion:a MAS relacion:b            {: RESULT = a + " + " + b; :}
         |ENTERO:a                           {:RESULT=a;:}       
-        |CADENA:a                           {:RESULT=a;:}    
-        |DECIMAL:a                          {:RESULT=a;:}     
-        |ID:a                               {:RESULT=a;:}  
-        |TRUE:a                              {:RESULT=a;:}             
+        |CADENA:a                            {:RESULT=a;:}    
+        |DECIMAL:a                           {:RESULT=a;:}     
+        |ID:a                                {:RESULT=a;:}  
+        |TRUE:a                              {:RESULT=a;:}
+        |FALSE:a                             {:RESULT=a;:}   
+        |CHARI ID:a CHARI                       {:RESULT="'"+a+"'";:}
+        
     ;
 //--------------------------OPERADORES  LOGICOS-------------------------------------> 
 logico::=AND                              {:RESULT="and";:}                
@@ -274,7 +270,7 @@ unwhile::=WHILE PARENTESIS_A operadores:a PARENTESIS_C LLAVE_A lista_Inst:b LLAV
         ;
 
 //-----------------------------SWITCH----------------------------------> 
-unswitch::=SWITCH PARENTESIS_A Expresion:c PARENTESIS_C LLAVE_A uncaso:a LLAVE_C    
+unswitch::=SWITCH PARENTESIS_A operadores:c PARENTESIS_C LLAVE_A uncaso:a LLAVE_C    
 {:RESULT="def switch("+c+"):\n switcher = {\n"+a+"\n}";:} 
     ;
 
@@ -285,15 +281,9 @@ uncaso::=uncaso:a otrocaso:b            {:RESULT=a+""+indent(b.toString(), 1);:}
 
 
 
-otrocaso::= CASE Expresion:a DOSP lista_Inst:b                       {:RESULT=a+": "+b+",";:} 
-        |CASE Expresion:a DOSP lista_Inst:b    unbreak               {:RESULT=a+": "+b+",";:}  
-        |casodefalut:a                                            {:RESULT=a;:}      
-        |casodefalut:a unbreak                                      {:RESULT=a;:} 
-    ;
-
-casodefalut::=DEFAULT DOSP lista_Inst:b                           {:RESULT="n:"+b+",";:}          
-    ;
-unbreak::=BREAK PUNTO_COMA
+otrocaso::= CASE operadores:a DOSP lista_Inst:b                       {:RESULT=a+": "+b.toString().trim()+",";:}
+        | DEFAULT DOSP lista_Inst:b                           {:RESULT="n:"+b.toString().trim()+",";:}                                            
+       
     ;
 
 
@@ -391,8 +381,8 @@ otrabarra::=lagrafa otrabarra
 lagrafa::=STRING TITULO IGUAL buscardato:a PUNTO_COMA                         {:titulo=(String)a;:}                         
         |STRING CORCHETE_A CORCHETE_C EJEX IGUAL LLAVE_A ejexdatos LLAVE_C  PUNTO_COMA
         |DOUBLE CORCHETE_A CORCHETE_C VALORES IGUAL LLAVE_A valores LLAVE_C  PUNTO_COMA
-        |STRING TITULOY  IGUAL buscardato:a PUNTO_COMA                  {:titulox=(String)a; :}
-        |STRING TITULOX IGUAL buscardato:a PUNTO_COMA                     {:tituloy=(String)a;:}
+        |STRING TITULOY  IGUAL buscardato:a PUNTO_COMA                  {:tituloy=(String)a; :}
+        |STRING TITULOX IGUAL buscardato:a PUNTO_COMA                     {:titulox=(String)a;:}
         ;
 
 ejexdatos::= eldato ejexdatos

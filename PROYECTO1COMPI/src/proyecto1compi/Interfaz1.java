@@ -416,7 +416,7 @@ public static boolean EsStay =false;
         System.out.println("Aqui va lo statpy");
         
         //--------------------------ANALIZADOR CUP Y FLEX         
-    //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
+        //analizadoresStay("src/StatpyAnalizadores/", "lexico.jflex", "sintactico.cup");
         
         //OBTENGO EL TXTO DE LA ENTRADA 
           String Texto_enlaentrada = Entrada.getText();   
