@@ -249,13 +249,15 @@ relacion::= relacion:a MAYOR relacion:b     {: RESULT = a + ">" + b; :}
         |relacion:a POR relacion:b            {: RESULT = a + " *" + b; :}
         |relacion:a DIV relacion:b            {: RESULT = a + " / " + b; :}
         |relacion:a MAS relacion:b            {: RESULT = a + " + " + b; :}
+        |NOT  relacion:b                            {:RESULT="not"+b;:}  
         |ENTERO:a                           {:RESULT=a;:}       
         |CADENA:a                            {:RESULT=a;:}    
         |DECIMAL:a                           {:RESULT=a;:}     
         |ID:a                                {:RESULT=a;:}  
         |TRUE:a                              {:RESULT=a;:}
         |FALSE:a                             {:RESULT=a;:}   
-        |CHARI ID:a CHARI                       {:RESULT="'"+a+"'";:}
+        |CHARI relacion:a CHARI                       {:RESULT="'"+a+"'";:}
+       
         
     ;
 //--------------------------OPERADORES  LOGICOS-------------------------------------> 

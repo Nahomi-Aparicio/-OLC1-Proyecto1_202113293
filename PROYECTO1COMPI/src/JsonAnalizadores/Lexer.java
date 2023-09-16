@@ -283,8 +283,6 @@ public class Lexer implements java_cup.runtime.Scanner {
   /** Whether the user-EOF-code has already been executed. */
   private boolean zzEOFDone;
 
-  /* user code: */
-
 
   /**
    * Creates a new scanner
@@ -292,6 +290,8 @@ public class Lexer implements java_cup.runtime.Scanner {
    * @param   in  the java.io.Reader to read input from.
    */
   public Lexer(java.io.Reader in) {
+      yyline = 1;
+    yycolumn =1;
     this.zzReader = in;
   }
 

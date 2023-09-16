@@ -15,8 +15,32 @@ public class TablaTokensStatpyHTML {
    public static  int a=0;
     public static void generateHTMLFromTokensList(LinkedList<TokensStat> tokensList) {
         String htmlContent = "<html>\n" +
-                             "<head><title>Lista de Tokens</title></head>\n" +
-                             "<body>\n" +
+                "<head>\n" +
+                "<title>Lista de Tokens</title>\n" +
+                "<style>\n" +
+                "   body {\n" +
+                "       background-color: #f0f0f0; /* Cambia el color de fondo de la página */\n" +
+                "   }\n" +
+                "   table {\n" +
+                "       width: 80%;\n" +
+                "       margin: 0 auto;\n" +
+                "       border-collapse: collapse;\n" +
+                "   }\n" +
+                "   th, td {\n" +
+                "       padding: 8px;\n" +
+                "       text-align: center;\n" +
+                "   }\n" +
+                "   th {\n" +
+                "       background-color: #007bff;\n" +
+                "       color: #fff;\n" +
+                "   }\n" +
+                "   tr:nth-child(even) {\n" +
+                "       background-color: #f2f2f2;\n" +
+                "   }\n" +
+                "   /* Agrega más estilos si es necesario */\n" +
+                "</style>\n" +
+                "</head>\n" +
+                "<body style=\"background-color: #f0f0f0;\">\n" +
                              "<div style=\"text-align:center;\">\n"+
                              "<table border=\"1\" style=\"margin: 0 auto;\">\n" +
                              "<tr align=\"center\"><th>LEXEMA</th>\n" +
